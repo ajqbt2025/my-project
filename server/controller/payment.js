@@ -179,7 +179,7 @@ exports.verifyPayment = async (req, res) => {
 
 
 
-const Payment = require("../models/Payment");
+const Payment = require("../Models/Payment");
 
 // ===============================
 // 💰 Create Payment (Attach with Client)

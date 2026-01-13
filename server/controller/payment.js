@@ -2,7 +2,7 @@
 
 
 const crypto = require("crypto");
-
+const Payment = require("../Models/payment");
 const Client = require("../Models/Client");
 const MaritalCertificate = require("../Models/MeritalCertificate");
 const CertificateManagement = require("../Models/Certificate");
@@ -177,9 +177,6 @@ exports.verifyPayment = async (req, res) => {
 };
 
 
-
-
-const Payment = require("../Models/Payment");
 
 // ===============================
 // 💰 Create Payment (Attach with Client)

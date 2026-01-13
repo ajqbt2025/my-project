@@ -1,4 +1,4 @@
-const MaritalStatus = require("../models/ClientFullDetials/MeritalStatus");
+const MaritalStatus = require("../Models/ClientFullDetials/MeritalStatus");
 
 exports.createMaritalStatus = async (req, res) => {
   try {

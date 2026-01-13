@@ -177,10 +177,6 @@ exports.verifyPayment = async (req, res) => {
 
 
 
-<<<<<<< HEAD
-
-
-
 // ===============================
 // 💰 Create Payment (Attach with Client)
 // ===============================

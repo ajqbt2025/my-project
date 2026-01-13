@@ -1,6 +1,6 @@
 
 
-const { instance } = require("../config/razorpay");
+
 const crypto = require("crypto");
 
 const Client = require("../Models/Client");
@@ -27,7 +27,6 @@ exports.capturePayment = async (req, res) => {
       receipt: `order_${Date.now()}`,
     };
 
-    const order = await instance.orders.create(options);
 
     return res.status(200).json({
       success: true,

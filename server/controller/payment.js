@@ -1,109 +1,8 @@
-// const { instance } = require("../config/razorpay");
-// const crypto = require("crypto");
-// const mongoose = require("mongoose");
-// const Client = require("../models/Client");
 
-// /* ======================================================
-//    1️⃣ CAPTURE PAYMENT (CREATE RAZORPAY ORDER)
-//    ====================================================== */
-// exports.capturePayment = async (req, res) => {
-//   try {
-//     // 🔒 FIXED AMOUNT (₹8)
-//     const amount = 8;
-
-//     const options = {
-//       amount: amount * 100, // paise
-//       currency: "INR",
-//       receipt: `client_${Date.now()}`,
-//     };
-
-//     const order = await instance.orders.create(options);
-
-//     return res.status(200).json({
-//       success: true,
-//       order,
-//     });
-//   } catch (error) {
-//     console.error("CAPTURE PAYMENT ERROR:", error);
-//     return res.status(500).json({
-//       success: false,
-//       message: "Could not initiate payment",
-//     });
-//   }
-// };
-
-// /* ======================================================
-//    2️⃣ VERIFY PAYMENT + CREATE CLIENT
-//    ====================================================== */
-// exports.verifyPayment = async (req, res) => {
-//   try {
-//     const {
-//       razorpay_order_id,
-//       razorpay_payment_id,
-//       razorpay_signature,
-//       client,        // redux wala pending client
-//     } = req.body;
-
-//     if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature || !client) {
-//       return res.status(400).json({
-//         success: false,
-//         message: "Missing payment details",
-//       });
-//     }
-
-//     // SIGNATURE VERIFY
-//     const body = razorpay_order_id + "|" + razorpay_payment_id;
-
-//     const expectedSignature = crypto
-//       .createHmac("sha256", process.env.RAZORPAY_SECRET)
-//       .update(body)
-//       .digest("hex");
-
-//     if (expectedSignature !== razorpay_signature) {
-//       return res.status(400).json({
-//         success: false,
-//         message: "Invalid payment signature",
-//       });
-//     }
-
-//     // 🔥 CLIENT CREATE AFTER SUCCESS PAYMENT
-//     const newClient = await Client.create({
-//       personalDetails: client.personalDetailsId,
-//       qualifications: [client.qualificationId],   // 👈 ARRAY hai model me
-//       occupation: client.occupationId,
-//       physicalCondition: client.physicalConditionId,
-//       maritalStatus: client.maritalStatusId,
-//       fatherGuardian: client.fatherGuardianId,
-//       grandParent: client.grandParentId,
-//       bankDetails: client.bankDetailsId,
-
-//       createdBy: req.user.id,          // ✅ REQUIRED FIELD FIXED
-//       status: "pending",               // ✅ enum ke mutabiq
-//       price: 8,
-
-//       paymentStatus: "paid",
-//       paymentId: razorpay_payment_id,
-//     });
-
-//     return res.status(200).json({
-//       success: true,
-//       message: "Payment verified & client created",
-//       client: newClient,
-//     });
-
-//   } catch (err) {
-//     console.error("VERIFY PAYMENT ERROR:", err);
-//     return res.status(500).json({
-//       success: false,
-//       message: "Payment verification failed",
-//     });
-//   }
-// };
-
-const { instance } = require("../config/razorpay");
+const { instance } = require("../config/razorPay");
 const crypto = require("crypto");
 
-const Client = require("../models/Client");
+const Client = require("../Models/Client");
 const MaritalCertificate = require("../Models/MeritalCertificate");
 const CertificateManagement = require("../Models/Certificate");
 
@@ -281,7 +180,7 @@ exports.verifyPayment = async (req, res) => {
 
 
 
-const Payment = require("../models/Payment");
+const Payment = require("../Models/payment");
 
 // ===============================
 // 💰 Create Payment (Attach with Client)

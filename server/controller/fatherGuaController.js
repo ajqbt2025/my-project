@@ -1,4 +1,4 @@
-const FatherGuardian = require("../models/ClientFullDetials/FatherGuardian");
+const FatherGuardian = require("../Models/ClientFullDetials/FatherGuardian");
 const { uploadImageToCloudinary } = require("../utils/imageUploader");
 
 // Create Father / Guardian / Spouse Details

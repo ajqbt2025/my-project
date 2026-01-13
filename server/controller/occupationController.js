@@ -1,4 +1,4 @@
-const Occupation = require("../models/ClientFullDetials/Occupation");
+const Occupation = require("../Models/ClientFullDetials/Occupation");
 
 // ✅ Create Occupation & Skill (handles both business & job)
 exports.createOccupation = async (req, res) => {

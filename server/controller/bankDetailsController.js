@@ -1,4 +1,4 @@
-const BankDetail = require("../models/ClientFullDetials/BankDetails");
+const BankDetail = require("../Models/ClientFullDetials/BankDetails");
 const { uploadImageToCloudinary } = require("../utils/imageUploader");
 
 // ✅ Create Bank Detail

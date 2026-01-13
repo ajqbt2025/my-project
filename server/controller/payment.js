@@ -1,7 +1,7 @@
 
 const { instance } = require("../config/razorPay");
 const crypto = require("crypto");
-
+const Payment = require("../Models/payment")
 const Client = require("../Models/Client");
 const MaritalCertificate = require("../Models/MeritalCertificate");
 const CertificateManagement = require("../Models/Certificate");
@@ -26,11 +26,9 @@ exports.capturePayment = async (req, res) => {
       receipt: `order_${Date.now()}`,
     };
 
-    const order = await instance.orders.create(options);
 
     return res.status(200).json({
       success: true,
-      order,
       amount,
     });
 
@@ -179,8 +177,9 @@ exports.verifyPayment = async (req, res) => {
 
 
 
+<<<<<<< HEAD
 
-const Payment = require("../Models/payment");
+
 
 // ===============================
 // 💰 Create Payment (Attach with Client)

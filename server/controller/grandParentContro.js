@@ -1,4 +1,8 @@
-const GrandParent = require("..//ClientFullDetials/GrandParent");
+
+
+
+const GrandParent = require("../Models/ClientFullDetials/GrandParent");
+
 const { uploadImageToCloudinary } = require("../utils/imageUploader");
 
 // ✅ Create Grandparent Details

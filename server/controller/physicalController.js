@@ -1,4 +1,4 @@
-const PhysicalCondition = require("../models/ClientFullDetials/PhysicalCondition");
+const PhysicalCondition = require("../Models/ClientFullDetials/PhysicalCondition");
 
 // ✅ Create Physical Condition (handles both normal & abnormal)
 exports.createPhysicalCondition = async (req, res) => {

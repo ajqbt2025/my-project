@@ -1,6 +1,6 @@
 const Client = require("../../Models/Client");
-const CertificateManagement = require("../../models/Certificate");
-const MaritalCertificate = require("../../models/MeritalCertificate");
+const CertificateManagement = require("../../Models/Certificate");
+const MaritalCertificate = require("../../Models/MeritalCertificate");
 const Notification = require("../../Models/Notification")
 exports.getAdminClientActivity = async (req, res) => {
   try {

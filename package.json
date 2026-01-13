@@ -2,9 +2,9 @@
   "name": "react-tailwind-css-starter-pack",
   "version": "0.1.0",
   "engines": {
-  "node": ">=22"
-},
-"engineStrict": true,
+    "node": "24.x"
+  },
+  "engineStrict": true,
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^2.9.0",
@@ -37,8 +37,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-  "build": "react-scripts build",
-  "eject": "react-scripts eject",
+    "build": "react-scripts build",
+    "eject": "react-scripts eject",
     "server": "cd server && npm run dev",
     "dev": "concurrently -n \"client,server\" -c \"bgBlue,bgYellow\" \"npm start\" \"npm run server\""
   },

@@ -1,7 +1,7 @@
-const Client = require("../models/Client");
-const CertificateManagement = require("../models/Certificate");
-const MaritalCertificate = require("../models/MeritalCertificate");
-const PersonalDetails = require("../models/ClientFullDetials/PersonalDetails");
+const Client = require("../Models/Client");
+const CertificateManagement = require("../Models/Certificate");
+const MaritalCertificate = require("../Models/MeritalCertificate");
+const PersonalDetails = require("../Models/ClientFullDetials/PersonalDetails");
 
 exports.searchClientStatus = async (req, res) => {
   try {

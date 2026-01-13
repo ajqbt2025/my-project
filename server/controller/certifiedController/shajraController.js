@@ -1,5 +1,5 @@
 const CertificateManagement = require("../../Models/Certificate");
-const Client = require("../../models/Client");
+const Client = require("../../Models/Client");
 const { uploadImageToCloudinary } = require("../../utils/imageUploader");
 
 /* ======================================================

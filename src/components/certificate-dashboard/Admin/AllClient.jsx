@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState ,useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -27,24 +27,29 @@ export default function AllClients() {
     return new Date(date).toLocaleDateString("en-IN");
   };
 
-  const fetchClients = async () => {
+  const fetchClients = useCallback(async () => {
     if (!token) return;
 
     setLoading(true);
 
-    const res = await getAllClientsService(page, token);
+    try {
+      const res = await getAllClientsService(page, token);
 
-    if (res?.success) {
-      setClients(res.clients || []);
-      setPages(res.pages || 1);
+      if (res?.success) {
+        setClients(res.clients || []);
+        setPages(res.pages || 1);
+      }
+    } catch (error) {
+      console.error("Fetch clients error:", error);
+    } finally {
+      setLoading(false);
     }
+  }, [page, token]);
 
-    setLoading(false);
-  };
-
+  // run on page change
   useEffect(() => {
     fetchClients();
-  }, [page]);
+  }, [fetchClients]);
 
   const filtered = clients.filter((c) =>
     (c?.clientId || "").toLowerCase().includes(search.toLowerCase())

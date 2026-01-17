@@ -1,10 +1,10 @@
 import {
-  VscHome,
+  
   VscAccount,
-  VscChecklist,
+
   VscOrganization,
   VscVerifiedFilled,
-  VscSearch,
+  
   VscServerProcess,
   VscCreditCard,
   VscCloudUpload,

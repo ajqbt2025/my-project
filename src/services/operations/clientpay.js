@@ -143,13 +143,12 @@
 
 
 import { toast } from "react-hot-toast";
-import rzpLogo from "../../assests/Logo.png";
+
 import { apiConnector } from "../apiConnector";
 import { clienPaymenttAPI } from "../api";
 
 const {
- CLIENT_PAYMENT_API,
-  CLIENT_VERIFY_API,
+
   PAYMENT_CREATE_API,
   PAYMENT_SUMMARY_API,
   CONTACT_SAVE_API,

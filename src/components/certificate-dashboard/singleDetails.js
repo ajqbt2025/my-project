@@ -59,8 +59,9 @@ const ClientDetail = () => {
         </h1>
 
         <div className="flex justify-between mr-10 ml-10 items-center mb-4">
-          <img src={logo} className="w-[60px]" />
-          <img src={logo2} className="w-[220px]" />
+          <img src={logo} alt="Organization Logo" className="w-[60px]" />
+<img src={logo2} alt="Community Header Logo" className="w-[220px]" />
+
         </div>
 
         {/* ------------- PERSONAL ------------- */}

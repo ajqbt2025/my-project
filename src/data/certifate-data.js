@@ -4,7 +4,7 @@ import {
   VscFilePdf,
   VscVerified,
   VscCreditCard,
-  VscCloudUpload,
+  
 } from "react-icons/vsc";
 
 export const CertifiedLinks = [

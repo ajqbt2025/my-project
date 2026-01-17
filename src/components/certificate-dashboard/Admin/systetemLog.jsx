@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState ,useCallback} from "react";
 import { useSelector } from "react-redux";
 
 import {
@@ -30,25 +30,31 @@ export default function AdminMonitorPage() {
   const [showMaritalMore, setShowMaritalMore] = useState(false);
   const [showShajrahMore, setShowShajrahMore] = useState(false);
 
-  useEffect(() => {
-    loadAll();
-  }, []);
+  const loadAll = useCallback(async () => {
+    if (!token) return;
 
-  const loadAll = async () => {
     setLoading(true);
 
-    const a = await getAdminClientActivityService(token);
-    const s = await getClientStatusReportService(token);
-    const c = await getClientCreatedByAdminsService(token);
+    try {
+      const a = await getAdminClientActivityService(token);
+      const s = await getClientStatusReportService(token);
+      const c = await getClientCreatedByAdminsService(token);
 
-    console.log("Admin Created Reports => ", c);
+      if (a?.success) setActivity(a.data);
+      if (s?.success) setStatusReport(s.data);
+      if (c?.success) setCreatedByReport(c.data);
+    } catch (error) {
+      console.error("Admin monitor load error:", error);
+    } finally {
+      setLoading(false);
+    }
+  }, [token]);
 
-    if (a?.success) setActivity(a.data);
-    if (s?.success) setStatusReport(s.data);
-    if (c?.success) setCreatedByReport(c.data);
+  // ✅ dependency fixed
+  useEffect(() => {
+    loadAll();
+  }, [loadAll]);
 
-    setLoading(false);
-  };
 
   if (loading)
     return (

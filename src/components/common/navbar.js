@@ -164,11 +164,7 @@ function Navbar() {
                     Log in
                   </button>
                 </Link>
-                <Link to="/signup" onClick={() => setMobileMenuOpen(false)}>
-                  <button className="w-28 rounded-md border border-richblack-700 bg-richblack-800 px-4 py-2 text-richblack-100">
-                    Sign up
-                  </button>
-                </Link>
+                
               </>
             ) : (
               <ProfileDropdown />

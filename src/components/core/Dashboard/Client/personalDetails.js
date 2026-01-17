@@ -3,10 +3,10 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { IoAddCircleOutline } from "react-icons/io5";
 import { toast } from "react-hot-toast";
-import { useLocation, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 
 import { personalDetails } from "../../../../services/operations/ClientService";
-import { setPersonalDetailsId } from "../../../../slices/clientSlice";
+
 import { setPersonalDetails } from "../../../../slices/clientSlice";
 
 // import { ClientLInk } from "../../../../data/dashboardLink";
@@ -14,7 +14,7 @@ import { setPersonalDetails } from "../../../../slices/clientSlice";
 const PersonalDetailsForm = ({ loading }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
+  
   const { token } = useSelector((state) => state.auth);
   console.log("personal details toekn",token)
   const {

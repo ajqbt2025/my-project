@@ -5,9 +5,7 @@ import { useDispatch } from "react-redux";
 
 import { createPaymentService } from "../services/operations/clientpay";
 import { createFullClient } from "../services/operations/ClientService";
-import {
-  saveMaritalCertificateService,
-} from "../services/operations/CertifiedService";
+
 
 export default function PaymentPage() {
 const [showModal, setShowModal] = useState(false);

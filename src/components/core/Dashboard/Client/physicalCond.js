@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { IoAddCircleOutline } from "react-icons/io5";
 import { toast } from "react-hot-toast";
-import { useLocation, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 
 import { physicalConditionDetails } from "../../../../services/operations/ClientService";
 import { setPhysicalCondition } from "../../../../slices/clientSlice";
@@ -11,7 +11,7 @@ import { setPhysicalCondition } from "../../../../slices/clientSlice";
 const PhysicalConditionDetailsPage = ({ loading }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
+  
     const { token } = useSelector((state) => state.auth);
 
   const [conditionType, setConditionType] = useState("");

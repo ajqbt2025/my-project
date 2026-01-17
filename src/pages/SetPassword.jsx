@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { ACCOUNT_TYPE } from "../utils/constants";
 import { setPasswordAPI } from "../services/operations/authAPI";
 import { setUser } from "../slices/profileSlice";
-import { setToken } from "../slices/authSlice";
+
 
 function SetPasswordForm() {
   const navigate = useNavigate();

@@ -14,7 +14,7 @@ function SetPasswordForm() {
   const dispatch = useDispatch();
 
   const { user } = useSelector((state) => state.profile);
-  const [accountType, setAccountType] = useState(user?.accountType || ACCOUNT_TYPE.STUDENT);
+  const [accountType] = useState(user?.accountType || ACCOUNT_TYPE.STUDENT);
 
   const [formData, setFormData] = useState({
     password: "",

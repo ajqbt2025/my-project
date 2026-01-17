@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect ,useCallback } from "react";
 import { useLocation } from "react-router-dom";
 import { downloadIdCard } from "../../services/operations/CertifiedService";
 import MultiSearchBar from "../../pages/ClientSearchBar";
@@ -20,7 +20,7 @@ const IdCardPage = () => {
   // =============================
   // 🔍 SEARCH FUNCTION
   // =============================
-  const handleSearch = async () => {
+ const handleSearch = useCallback(async () => {
     if (!clientId) {
       alert("Please enter Client ID (AJQFT-XXXX)");
       return;
@@ -37,13 +37,13 @@ const IdCardPage = () => {
         setIdCardImage(null);
         alert("ID Card not found");
       }
-
     } catch (error) {
+      console.error(error);
       alert("Failed to fetch ID Card");
     } finally {
       setSearchLoading(false);
     }
-  };
+  }, [clientId, token]);
 
   // =============================
   // 🚀 AUTO SEARCH ON MOUNT
@@ -52,7 +52,7 @@ const IdCardPage = () => {
     if (passedClientId) {
       handleSearch();
     }
-  }, [passedClientId]);
+  }, [passedClientId, handleSearch]);
 
   // =============================
   // ⬇ DOWNLOAD

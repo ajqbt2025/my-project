@@ -33,7 +33,7 @@ import PaymentPage from "./pages/paymentStatic";
 import IdCardPage from "./components/certificate-dashboard/Idcard";
 import UploadIdCardPage from "./components/certificate-dashboard/Admin/uploadId";
 import ShajrahForm from "./components/certificate-dashboard/shajraPage";
-import Character_cer from "./components/certificate-dashboard/character_cer";
+import CharacterCer  from "./components/certificate-dashboard/character_cer";
 import MaritalCertificatePage from "./components/certificate-dashboard/MeritalCerSave"
 import AdminDashboard from "./pages/AdminDash"
 import AllClients from "./components/certificate-dashboard/Admin/AllClient";
@@ -175,7 +175,7 @@ function App() {
           <Route path="certified/profile" element={<Mydetails/>}/>
           <Route path="certified/Id-card" element={<IdCardPage/>}/>
           <Route path="certified/shajra" element={<ShajrahForm/>}/>
-          <Route path="/certified/character/Certificate" element={<Character_cer/>}/>
+          <Route path="/certified/character/Certificate" element={<CharacterCer />}/>
           <Route path="/certified/meritalCertificate" element={<MaritalCertificatePage/>}/>
           
 

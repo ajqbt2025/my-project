@@ -1,7 +1,7 @@
 import { useState } from "react";
 import {
   AiOutlineMenu,
-  AiOutlineShoppingCart,
+  
   AiOutlineClose,
   AiOutlineHome,
   AiOutlineSearch,
@@ -15,13 +15,13 @@ import { Link, matchPath, useLocation } from "react-router-dom";
 import logo from "../../assests/head logo2.png";
 import logo2 from "../../assests/head logo.png";
 import { NavbarLinks } from "../../data/navbar-links";
-import { ACCOUNT_TYPE } from "../../utils/constants";
+
 import ProfileDropdown from "../core/Auth/ProfileDropdown";
 import { details_links } from "../../data/detailsLink";
 
 function Navbar() {
   const { token } = useSelector((state) => state.auth);
-  const { user } = useSelector((state) => state.profile);
+
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);

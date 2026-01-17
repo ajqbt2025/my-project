@@ -1,8 +1,8 @@
 import React from "react";
-import { useSelector } from "react-redux";
+
 import * as Icons from "react-icons/vsc";
 import { NavLink, matchPath, useLocation } from "react-router-dom";
-import { ClientLInk } from "../../../data/dashboardLink";
+
 import { memo } from "react";
 
 const SidebarLink = ({ link, completed }) => {

@@ -38,7 +38,7 @@ export default function ShajrahForm() {
   const {
     register,
     handleSubmit,
-    reset,
+    
     setValue,
     formState: { errors },
   } = useForm();

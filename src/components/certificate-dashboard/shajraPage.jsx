@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from "react";
+import { useState, useEffect ,useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { IoAddCircleOutline } from "react-icons/io5";
@@ -56,14 +56,42 @@ export default function ShajrahForm() {
   ]);
 
   // ============= AUTO LOAD WHEN COMING FROM PROFILE ============
+  const handleSearch = useCallback(
+    async (id) => {
+      const searchId = id || clientId;
+
+      if (!searchId) {
+        toast.error("Client ID required");
+        return;
+      }
+
+      try {
+        setSearchLoading(true);
+
+        const res = await getShajrahDetailsService(searchId);
+        if (!res?.success) return;
+
+        setShajrahData(res.shajrah);
+
+        setValue("familyId", res.shajrah?.familyId || "");
+        setValue("fullName", res.shajrah?.fullName || "");
+
+        toast.success("Shajrah details loaded");
+      } finally {
+        setSearchLoading(false);
+      }
+    },
+    [clientId, setValue]
+  );
+
+  // ============= AUTO LOAD WHEN COMING FROM PROFILE ============
   useEffect(() => {
     if (autoClient) {
       setClientId(autoClient);
       setValue("clientId", autoClient);
       handleSearch(autoClient);
     }
-  }, [autoClient]);
-
+  }, [autoClient, setValue, handleSearch]);
   const handlePrint = () => {
     if (!shajrahData?.shajrahImage) return;
 
@@ -119,32 +147,7 @@ export default function ShajrahForm() {
   };
 
   // ================= SEARCH FUNCTION ===================
-  const handleSearch = async (id) => {
-    const searchId = id || clientId;
-
-    if (!searchId) {
-      toast.error("Client ID required");
-      return;
-    }
-
-    try {
-      setSearchLoading(true);
-
-      const res = await getShajrahDetailsService(searchId);
-
-      if (!res?.success) return;
-
-      setShajrahData(res.shajrah);
-
-      setValue("familyId", res.shajrah?.familyId || "");
-      setValue("fullName", res.shajrah?.fullName || "");
-
-      toast.success("Shajrah details loaded");
-    } finally {
-      setSearchLoading(false);
-    }
-  };
-
+  
   // ================= GENERATION HANDLERS =================
   const addGeneration = () => {
     if (generations.length >= 10) return;

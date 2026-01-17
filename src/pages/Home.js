@@ -3,10 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import Footer from "../components/common/Footer";
 import { searchCertificateByClientIdService } from "../services/operations/ClientService";
-import { toast } from "react-hot-toast";
 
-import client from "../assests/buttonImage/student-section.png";
-import certificate from "../assests/buttonImage/certificate.png";
 import MultiSearchBar from "./ClientSearchBar";
 import { ACCOUNT_TYPE } from "../utils/constants";
 import { useSelector } from "react-redux";

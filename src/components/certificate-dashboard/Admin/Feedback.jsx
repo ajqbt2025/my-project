@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useCallback } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
 
@@ -11,23 +11,30 @@ export default function ContactMessagesPage() {
   const [loading, setLoading] = useState(true);
   const [expandedId, setExpandedId] = useState(null);
 
-  const loadMessages = async () => {
+const loadMessages = useCallback(async () => {
+    if (!token) return;
+
     setLoading(true);
 
-    const res = await getAllContactMessagesService(token);
-    if (res?.success) {
-      setMessages(res.messages);
-    } else {
-      toast.error("Failed to load messages");
+    try {
+      const res = await getAllContactMessagesService(token);
+      if (res?.success) {
+        setMessages(res.messages || []);
+      } else {
+        toast.error("Failed to load messages");
+      }
+    } catch (error) {
+      console.error("Load messages error:", error);
+      toast.error("Something went wrong");
+    } finally {
+      setLoading(false);
     }
+  }, [token]);
 
-    setLoading(false);
-  };
-
+  // ✅ useEffect dependency fixed
   useEffect(() => {
     loadMessages();
-  }, []);
-
+  }, [loadMessages]);
   return (
     <div className="form-container max-w-6xl">
       <div className="flex items-center justify-between">

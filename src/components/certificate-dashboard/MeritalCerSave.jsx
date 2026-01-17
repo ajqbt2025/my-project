@@ -132,7 +132,7 @@
 
 
 
-import React, { useState } from "react";
+import React, { useState,useCallback  } from "react";
 import toast from "react-hot-toast";
 
 import {
@@ -154,20 +154,44 @@ const location = useLocation();
 
   const [maritalDetails, setMaritalDetails] = useState(null);
   const [showForm, setShowForm] = useState(false);
+   useEffect(() => {
+    if (location.state) {
+      setRegisterNo(location.state.registerNumber || "");
+      setGroomAadhaar(location.state.groomAadhaar || "");
+    }
+  }, [location.state]);
+
+  // 🔍 SEARCH (ESLint safe)
+  const handleSearch = useCallback(async () => {
+    const reg = registerNo?.toString().trim();
+    const aad = groomAadhaar?.toString().trim();
+
+    if (!reg || !aad) {
+      toast.error("Register Number aur Dulhe ka Aadhaar dono required");
+      return;
+    }
+
+    setMaritalDetails(null);
+
+    const res = await getMaritalCertificateByRegisterNoService({
+      registerNumber: reg,
+      groomAadhaar: aad,
+    });
+
+    if (res?.success) {
+      setMaritalDetails(res.maritalCertificate);
+      toast.success("Certificate found");
+    } else {
+      toast.error("No record found");
+    }
+  }, [registerNo, groomAadhaar]);
+
+  // 🚀 auto search when both available
   useEffect(() => {
-  if (location.state) {
-
-    setRegisterNo(location.state.registerNumber || "");
-    setGroomAadhaar(location.state.groomAadhaar || "");
-  }
-}, [location.state]);
-
-// auto search only when both filled
-useEffect(() => {
-  if (registerNo && groomAadhaar) {
-    handleSearch();
-  }
-}, [registerNo, groomAadhaar]);
+    if (registerNo && groomAadhaar) {
+      handleSearch();
+    }
+  }, [registerNo, groomAadhaar, handleSearch]);
 
 
 

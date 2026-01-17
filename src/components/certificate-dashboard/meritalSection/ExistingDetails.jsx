@@ -141,14 +141,41 @@ export default function ExistingDetails({ maritalDetails }) {
                   d?.witnessTwo?.address,
                 ],
 
-                ["6", "Signature",
-                  <img src={d?.groom?.signatureImage} className="h-8 mx-auto" />,
-                  <img src={d?.bride?.signatureImage} className="h-8 mx-auto" />,
-                  <img src={d?.qazi?.signatureImage} className="h-8 mx-auto" />,
-                  <img src={d?.wakil?.signatureImage} className="h-8 mx-auto" />,
-                  <img src={d?.witnessOne?.signatureImage} className="h-8 mx-auto" />,
-                  <img src={d?.witnessTwo?.signatureImage} className="h-8 mx-auto" />,
-                ],
+               [
+  "6",
+  "Signature",
+  <img
+    src={d?.groom?.signatureImage}
+    alt="Groom Signature"
+    className="h-8 mx-auto"
+  />,
+  <img
+    src={d?.bride?.signatureImage}
+    alt="Bride Signature"
+    className="h-8 mx-auto"
+  />,
+  <img
+    src={d?.qazi?.signatureImage}
+    alt="Qazi Signature"
+    className="h-8 mx-auto"
+  />,
+  <img
+    src={d?.wakil?.signatureImage}
+    alt="Wakil Signature"
+    className="h-8 mx-auto"
+  />,
+  <img
+    src={d?.witnessOne?.signatureImage}
+    alt="Witness One Signature"
+    className="h-8 mx-auto"
+  />,
+  <img
+    src={d?.witnessTwo?.signatureImage}
+    alt="Witness Two Signature"
+    className="h-8 mx-auto"
+  />,
+],
+
 
               ].map((row, idx) => (
                 <tr key={idx}>

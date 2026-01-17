@@ -278,7 +278,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
-import { createFullClient } from "../../../../services/operations/ClientService";
 import { setClient } from "../../../../slices/clientSlice";
 
 import logo from "../../../../assests/head logo2.png";

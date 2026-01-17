@@ -54,11 +54,13 @@ function App() {
   const userType = user?.accountType
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
-      const token = JSON.parse(localStorage.getItem("token"));
-      dispatch(getUserDetails(token, navigate));
-    }
-  }, []);
+  const token = localStorage.getItem("token");
+
+  if (token) {
+    dispatch(getUserDetails(JSON.parse(token), navigate));
+  }
+}, [dispatch, navigate]);
+
   return (
     <div className="flex min-h-screen w-screen flex-col bg-richblack-900 font-inter">
       <Navbar />

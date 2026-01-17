@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { IoAddCircleOutline } from "react-icons/io5";
-import { useLocation, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 
 // Services & Slices
@@ -12,7 +12,7 @@ import { setOccupation } from "../../../../slices/clientSlice";
 const OccupationDetailsPage = ({ loading }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
+ 
     const { token } = useSelector((state) => state.auth);
 
   // get clientId for linking

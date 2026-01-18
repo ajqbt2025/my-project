@@ -87,14 +87,24 @@ const BankDetailsPage = ({ loading }) => {
           errors={errors}
         />
 
-        <button
-          type="submit"
-          disabled={loading}
-          className="form-submit-btn flex items-center justify-center gap-2"
-        >
-          <IoAddCircleOutline size={20} />
-          Save & Next
-        </button>
+        <div className="flex justify-end gap-4 pt-4">
+  <button
+    type="submit"
+    disabled={loading}
+    className="form-submit-btn flex items-center justify-center gap-2"
+  >
+    <IoAddCircleOutline size={20} />
+    Save & Next
+  </button>
+
+  <button
+    type="button"
+    onClick={() => navigate("/dashboard/relation")}
+    className="form-skip-btn"
+  >
+    Skip
+  </button>
+</div>
       </form>
     </div>
   );
@@ -102,37 +112,27 @@ const BankDetailsPage = ({ loading }) => {
 
 export default BankDetailsPage;
 
-/* ---------- Helper Component ---------- */
 const InputField = ({ id, label, register, errors, type = "text" }) => (
   <div>
-    <label className="form-label">
-      {label} <sup className="text-pink-200">*</sup>
-    </label>
+    <label className="form-label">{label}</label>
     <input
       type={type}
-      {...register(id, { required: true })}
+      {...register(id)}
       className="form-input"
       placeholder={`Enter ${label.toLowerCase()}`}
     />
-    {errors[id] && (
-      <p className="text-xs text-pink-200 mt-1">{label} is required</p>
-    )}
   </div>
 );
 
+
 const FileField = ({ id, label, register, errors }) => (
   <div>
-    <label className="form-label">
-      {label} <sup className="text-pink-200">*</sup>
-    </label>
+    <label className="form-label">{label}</label>
     <input
       type="file"
       accept="image/*"
-      {...register(id, { required: true })}
+      {...register(id)}
       className="form-input"
     />
-    {errors[id] && (
-      <p className="text-xs text-pink-200 mt-1">Document image is required</p>
-    )}
   </div>
 );

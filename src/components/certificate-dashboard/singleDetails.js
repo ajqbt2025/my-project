@@ -210,7 +210,7 @@ const ClientDetail = () => {
         </div>
       </div>
 
-      <div className="mt-6 print:hidden flex justify-center">
+      <div className="mt-6 print:hidden mb-10 flex justify-center">
         <button
           onClick={handlePrint}
           className="bg-blue-600 text-white px-6 py-2 rounded"

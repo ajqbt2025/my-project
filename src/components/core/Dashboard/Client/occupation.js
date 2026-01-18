@@ -189,14 +189,14 @@ export default OccupationDetailsPage;
 
 /* ================= Helper Components ================= */
 
-const InputField = ({ id, label, register, errors, type = "text" }) => (
+const InputField = ({ id, label, register, errors, type = "text", required = true }) => (
   <div className="flex flex-col space-y-2">
     <label className="form-label">
-      {label} <sup className="text-pink-200">*</sup>
+      {label} {required && <sup className="text-pink-200">*</sup>}
     </label>
     <input
       type={type}
-      {...register(id)}
+      {...register(id, required ? { required: true } : {})}
       placeholder={`Enter ${label.toLowerCase()}`}
       className="form-input"
     />
@@ -206,13 +206,14 @@ const InputField = ({ id, label, register, errors, type = "text" }) => (
   </div>
 );
 
-const TextAreaField = ({ id, label, register, errors }) => (
+
+const TextAreaField = ({ id, label, register, errors, required = true }) => (
   <div className="flex flex-col space-y-2">
     <label className="form-label">
-      {label} <sup className="text-pink-200">*</sup>
+      {label} {required && <sup className="text-pink-200">*</sup>}
     </label>
     <textarea
-      {...register(id)}
+      {...register(id, required ? { required: true } : {})}
       placeholder={`Enter ${label.toLowerCase()}`}
       className="form-input"
     />

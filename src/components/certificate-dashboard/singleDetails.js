@@ -82,7 +82,7 @@ const ClientDetail = () => {
               {personalDetails?.profileImage ? (
                 <img
                   src={personalDetails.profileImage}
-alt="Client profile photo"
+ alt="Client profile"
                   className="w-full h-full object-cover"
                 />
               ) : (

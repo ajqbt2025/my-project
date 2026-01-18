@@ -54,10 +54,11 @@ const ClientDetail = () => {
           Client Details
         </h1>
 
-        <div className="flex items-center justify-between gap-4 mb-4 px-2 sm:px-6">
-          <img src={logo} className="w-10 sm:w-[60px]" />
-          <img src={logo2} className="w-36 sm:w-[220px]" />
-        </div>
+        <div className="flex justify-between mr-10 ml-10 items-center mb-4">
+  <img src={logo} className="w-[60px]" alt="Organization Logo" />
+  <img src={logo2} className="w-[220px]" alt="Header Logo" />
+</div>
+
 
         <Section title="Personal Details">
           <div className="flex flex-col sm:flex-row gap-6">

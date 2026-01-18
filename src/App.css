@@ -321,3 +321,15 @@ details > summary::-webkit-details-marker {
          bg-blue-500 py-2 font-semibold 
          hover:bg-blue-400 transition;
 }
+
+
+.form-skip-btn {
+  @apply w-full rounded text-center
+         border border-dashed border-richblack-500
+         bg-transparent py-2 font-medium
+         text-richblack-25
+         hover:bg-richblack-700
+         hover:border-richblack-300
+         transition;
+}
+

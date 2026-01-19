@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { useReactToPrint } from "react-to-print";
-import logo2 from "../../../assests/Logo.png";
+
+import logo2 from "../../../assests/buttonImage/from logo.png";
 import logo from "../../../assests/head logo2.png";
 
 export default function ExistingDetails({ maritalDetails }) {
@@ -21,53 +22,77 @@ export default function ExistingDetails({ maritalDetails }) {
       <img
         src={fixImageUrl(src)}
         alt={alt}
-        className="h-8 mx-auto object-contain"
+        className="h-6 mx-auto object-contain"
       />
     ) : null;
 
   return (
     <>
-      <div className="w-full overflow-auto">
+      <style>
+        {`
+        @media print {
+          body {
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+          }
+
+          @page {
+            size: A4 landscape;
+            margin: 10mm;
+          }
+
+          .print-root {
+            transform: scale(0.95);
+            transform-origin: top left;
+          }
+
+          table {
+            border-collapse: collapse !important;
+          }
+
+          th, td {
+            border: 1px solid #000 !important;
+            padding: 4px !important;
+            vertical-align: middle;
+          }
+
+          img {
+            max-height: 28px !important;
+            object-fit: contain !important;
+          }
+        }
+        `}
+      </style>
+
+      <div className="w-full overflow-x-auto">
         <div
           ref={printRef}
-          className="bg-white text-black p-4 text-sm min-w-[1000px] mx-auto border"
+          className="print-root bg-white text-black p-3 text-xs sm:text-sm min-w-[1000px] sm:mx-auto border scale-[0.9] sm:scale-100 origin-top-left"
         >
           <div className="border w-full p-2">
-            <div className="flex justify-between items-center">
-              <div className="w-[15%] flex justify-center">
-                <img
-                  src={logo}
-                  alt="Society Logo"
-                  className="h-16 object-contain"
-                />
-              </div>
+            <div className="flex items-center justify-between">
+              <img src={logo} alt="Society Logo" className="h-10 sm:h-16 object-contain" />
 
-              <div className="w-[55%] text-center">
-                <h2 className="text-xl font-bold">
+              <div className="text-center flex-1 px-2">
+                <h2 className="text-sm sm:text-xl font-bold">
                   Al-Jamiyatul Quresh Fraternity
                 </h2>
-                <p className="text-xs">
+                <p className="text-[10px] sm:text-xs">
                   Converted Marriage Certificate Of Quresh Community
                 </p>
-                <p className="text-xs mt-1">
+                <p className="text-[10px] sm:text-xs mt-1">
                   (Tarkheda, Amravati. MS 444601)
                 </p>
-                <p className="text-xs">
+                <p className="text-[10px] sm:text-xs">
                   Email: AJQBT2025@gmail.com | Contact: 9145115944 / 47
                 </p>
               </div>
 
-              <div className="w-[15%] flex justify-center">
-                <img
-                  src={logo2}
-                  alt="Masjid Logo"
-                  className="h-16 object-contain"
-                />
-              </div>
+              <img src={logo2} alt="Masjid Logo" className="h-10 sm:h-16 object-contain" />
             </div>
 
-            <div className="flex justify-end gap-3 mt-2">
-              <div className="border px-4 py-2 text-sm text-center">
+            <div className="flex justify-end gap-2 mt-2 text-[10px] sm:text-sm">
+              <div className="border px-2 py-1 text-center">
                 Masjid Reg. No
                 <br />
                 <span className="font-bold">
@@ -75,7 +100,7 @@ export default function ExistingDetails({ maritalDetails }) {
                 </span>
               </div>
 
-              <div className="border px-4 py-2 text-sm text-center">
+              <div className="border px-2 py-1 text-center">
                 Society Reg. No
                 <br />
                 <span className="font-bold">{d?.registerNumber}</span>
@@ -83,7 +108,7 @@ export default function ExistingDetails({ maritalDetails }) {
             </div>
           </div>
 
-          <div className="grid grid-cols-6 text-center mt-2">
+          <div className="grid grid-cols-6 text-center mt-2 text-[10px] sm:text-sm">
             {[
               ["Date Of Hijri", d?.nikahDetails?.hijriDate],
               ["Date Of Nikah", d?.nikahDetails?.nikahDate?.substring(0, 10)],
@@ -92,18 +117,18 @@ export default function ExistingDetails({ maritalDetails }) {
               ["Dower", d?.nikahDetails?.dower],
               ["Venue Of Nikah", d?.nikahDetails?.venue],
             ].map(([label, value], i) => (
-              <div key={i} className="border p-2">
+              <div key={i} className="border p-1">
                 <p className="font-semibold">{label}</p>
-                <p className="mt-1 h-[18px]">{value || "—"}</p>
+                <p className="mt-1">{value || "—"}</p>
               </div>
             ))}
           </div>
 
-          <table className="w-full mt-2 border text-center">
+          <table className="w-full mt-2 border text-center text-[10px] sm:text-sm">
             <thead>
               <tr>
-                <th className="border w-10">No.</th>
-                <th className="border w-32">Type</th>
+                <th className="border">No.</th>
+                <th className="border">Type</th>
                 <th className="border">Groom</th>
                 <th className="border">Bride</th>
                 <th className="border">Qazi</th>
@@ -115,59 +140,12 @@ export default function ExistingDetails({ maritalDetails }) {
 
             <tbody>
               {[
-                [
-                  "1",
-                  "Full Name",
-                  d?.groom?.fullName,
-                  d?.bride?.fullName,
-                  d?.qazi?.fullName,
-                  d?.wakil?.fullName,
-                  d?.witnessOne?.fullName,
-                  d?.witnessTwo?.fullName,
-                ],
-                [
-                  "2",
-                  "Father Name",
-                  d?.groom?.fatherName,
-                  d?.bride?.fatherName,
-                  d?.qazi?.fatherName,
-                  d?.wakil?.fatherName,
-                  d?.witnessOne?.fatherName,
-                  d?.witnessTwo?.fatherName,
-                ],
-                [
-                  "3",
-                  "Age",
-                  d?.groom?.age,
-                  d?.bride?.age,
-                  d?.qazi?.age,
-                  d?.wakil?.age,
-                  d?.witnessOne?.age,
-                  d?.witnessTwo?.age,
-                ],
-                [
-                  "4",
-                  "Occupation",
-                  d?.groom?.occupation,
-                  d?.bride?.occupation,
-                  d?.qazi?.occupation,
-                  d?.wakil?.occupation,
-                  d?.witnessOne?.occupation,
-                  d?.witnessTwo?.occupation,
-                ],
-                [
-                  "5",
-                  "Home Town",
-                  d?.groom?.address,
-                  d?.bride?.address,
-                  d?.qazi?.address,
-                  d?.wakil?.address,
-                  d?.witnessOne?.address,
-                  d?.witnessTwo?.address,
-                ],
-                [
-                  "6",
-                  "Signature",
+                ["1","Full Name",d?.groom?.fullName,d?.bride?.fullName,d?.qazi?.fullName,d?.wakil?.fullName,d?.witnessOne?.fullName,d?.witnessTwo?.fullName],
+                ["2","Father Name",d?.groom?.fatherName,d?.bride?.fatherName,d?.qazi?.fatherName,d?.wakil?.fatherName,d?.witnessOne?.fatherName,d?.witnessTwo?.fatherName],
+                ["3","Age",d?.groom?.age,d?.bride?.age,d?.qazi?.age,d?.wakil?.age,d?.witnessOne?.age,d?.witnessTwo?.age],
+                ["4","Occupation",d?.groom?.occupation,d?.bride?.occupation,d?.qazi?.occupation,d?.wakil?.occupation,d?.witnessOne?.occupation,d?.witnessTwo?.occupation],
+                ["5","Home Town",d?.groom?.address,d?.bride?.address,d?.qazi?.address,d?.wakil?.address,d?.witnessOne?.address,d?.witnessTwo?.address],
+                ["6","Signature",
                   <Sig src={d?.groom?.signatureImage} alt="Groom Signature" />,
                   <Sig src={d?.bride?.signatureImage} alt="Bride Signature" />,
                   <Sig src={d?.qazi?.signatureImage} alt="Qazi Signature" />,
@@ -178,9 +156,7 @@ export default function ExistingDetails({ maritalDetails }) {
               ].map((row, idx) => (
                 <tr key={idx}>
                   {row.map((cell, i) => (
-                    <td key={i} className="border p-1 h-8">
-                      {cell}
-                    </td>
+                    <td key={i} className="border p-1">{cell}</td>
                   ))}
                 </tr>
               ))}
@@ -189,12 +165,15 @@ export default function ExistingDetails({ maritalDetails }) {
         </div>
       </div>
 
-      <button
-        onClick={handlePrint}
-        className="mt-3 w-full bg-blue-600 text-white py-2 rounded"
-      >
-        🖨 Print Register Page
-      </button>
+     <div className="sticky bottom-0 left-0 flex justify-center items-center p-2 sm:static sm:p-0 border-t sm:border-0">
+  <button
+    onClick={handlePrint}
+    className="w-full sm:w-auto bg-blue-600 text-white py-3 sm:py-2 px-6 rounded"
+  >
+    🖨 Print Register Page
+  </button>
+</div>
+
     </>
   );
 }

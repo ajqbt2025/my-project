@@ -7,7 +7,6 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { fetchPublicNotifications } from "../../services/operations/AdminService";
-
 export default function PublicNotification() {
   const [notifications, setNotifications] = useState([]);
   const [expandedId, setExpandedId] = useState(null);

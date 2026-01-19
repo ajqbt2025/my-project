@@ -13,54 +13,47 @@ export default function ExistingDetails({ maritalDetails }) {
 
   return (
     <>
-      {/* ===== Scrollable Wrapper ===== */}
       <div className="w-full overflow-auto">
-        
-        {/* Inner Fixed A4 Width Content */}
         <div
           ref={printRef}
           className="bg-white text-black p-4 text-sm min-w-[1000px] mx-auto border"
         >
-
-          {/* ================= TOP HEADER TABLE ================= */}
           <div className="border w-full p-2">
-
             <div className="flex justify-between items-start">
-
-              {/* LEFT LOGO + ORG NAME */}
               <div className="w-[65%] text-center">
-
                 <h2 className="text-xl font-bold">
                   Al-Jamiyatul Quresh Fraternity
                 </h2>
-
                 <p className="text-xs">
                   Converted Marriage Certificate Of Quresh Community
                 </p>
-
                 <p className="text-xs mt-1">
                   (Tarkheda, Amravati. MS 444601)
                 </p>
-
                 <p className="text-xs">
                   Email: AJQBT2025@gmail.com | Contact: 9145115944 / 47
                 </p>
-
               </div>
 
-              {/* RIGHT SIDE – REG & RECEIPT */}
-              <div className="border px-4 py-2 text-sm">
-                Reg. & Receipt No:
-                <br />
-                <span className="font-bold">{d?.registerNumber}</span>
+              <div className="flex gap-2">
+                <div className="border px-3 py-2 text-sm text-center">
+                  Masjid Reg. No
+                  <br />
+                  <span className="font-bold">
+                    {d?.masjidRegisterNumber || "—"}
+                  </span>
+                </div>
+
+                <div className="border px-3 py-2 text-sm text-center">
+                  Society Reg. No
+                  <br />
+                  <span className="font-bold">{d?.registerNumber}</span>
+                </div>
               </div>
             </div>
-
           </div>
 
-          {/* ================= DATE HEADER BOXES ================= */}
           <div className="grid grid-cols-6 text-center mt-2">
-
             {[
               ["Date Of Hijri", d?.nikahDetails?.hijriDate],
               ["Date Of Nikah", d?.nikahDetails?.nikahDate?.substring(0, 10)],
@@ -74,12 +67,9 @@ export default function ExistingDetails({ maritalDetails }) {
                 <p className="mt-1 h-[18px]">{value || "—"}</p>
               </div>
             ))}
-
           </div>
 
-          {/* ================= MAIN BIG TABLE ================= */}
           <table className="w-full mt-2 border text-center">
-
             <thead>
               <tr>
                 <th className="border w-10">No.</th>
@@ -94,9 +84,10 @@ export default function ExistingDetails({ maritalDetails }) {
             </thead>
 
             <tbody>
-
               {[
-                ["1", "Full Name",
+                [
+                  "1",
+                  "Full Name",
                   d?.groom?.fullName,
                   d?.bride?.fullName,
                   d?.qazi?.fullName,
@@ -104,8 +95,9 @@ export default function ExistingDetails({ maritalDetails }) {
                   d?.witnessOne?.fullName,
                   d?.witnessTwo?.fullName,
                 ],
-
-                ["2", "Father Name",
+                [
+                  "2",
+                  "Father Name",
                   d?.groom?.fatherName,
                   d?.bride?.fatherName,
                   d?.qazi?.fatherName,
@@ -113,8 +105,9 @@ export default function ExistingDetails({ maritalDetails }) {
                   d?.witnessOne?.fatherName,
                   d?.witnessTwo?.fatherName,
                 ],
-
-                ["3", "Age",
+                [
+                  "3",
+                  "Age",
                   d?.groom?.age,
                   d?.bride?.age,
                   d?.qazi?.age,
@@ -122,8 +115,9 @@ export default function ExistingDetails({ maritalDetails }) {
                   d?.witnessOne?.age,
                   d?.witnessTwo?.age,
                 ],
-
-                ["4", "Occupation",
+                [
+                  "4",
+                  "Occupation",
                   d?.groom?.occupation,
                   d?.bride?.occupation,
                   d?.qazi?.occupation,
@@ -131,8 +125,9 @@ export default function ExistingDetails({ maritalDetails }) {
                   d?.witnessOne?.occupation,
                   d?.witnessTwo?.occupation,
                 ],
-
-                ["5", "Home Town",
+                [
+                  "5",
+                  "Home Town",
                   d?.groom?.address,
                   d?.bride?.address,
                   d?.qazi?.address,
@@ -140,60 +135,60 @@ export default function ExistingDetails({ maritalDetails }) {
                   d?.witnessOne?.address,
                   d?.witnessTwo?.address,
                 ],
-
-               [
-  "6",
-  "Signature",
-  <img
-    src={d?.groom?.signatureImage}
-    alt="Groom Signature"
-    className="h-8 mx-auto"
-  />,
-  <img
-    src={d?.bride?.signatureImage}
-    alt="Bride Signature"
-    className="h-8 mx-auto"
-  />,
-  <img
-    src={d?.qazi?.signatureImage}
-    alt="Qazi Signature"
-    className="h-8 mx-auto"
-  />,
-  <img
-    src={d?.wakil?.signatureImage}
-    alt="Wakil Signature"
-    className="h-8 mx-auto"
-  />,
-  <img
-    src={d?.witnessOne?.signatureImage}
-    alt="Witness One Signature"
-    className="h-8 mx-auto"
-  />,
-  <img
-    src={d?.witnessTwo?.signatureImage}
-    alt="Witness Two Signature"
-    className="h-8 mx-auto"
-  />,
-],
-
-
+                [
+                  "6",
+                  "Signature",
+                  d?.groom?.signatureImage ? (
+                    <img src={d.groom.signatureImage} className="h-8 mx-auto" />
+                  ) : (
+                    ""
+                  ),
+                  d?.bride?.signatureImage ? (
+                    <img src={d.bride.signatureImage} className="h-8 mx-auto" />
+                  ) : (
+                    ""
+                  ),
+                  d?.qazi?.signatureImage ? (
+                    <img src={d.qazi.signatureImage} className="h-8 mx-auto" />
+                  ) : (
+                    ""
+                  ),
+                  d?.wakil?.signatureImage ? (
+                    <img src={d.wakil.signatureImage} className="h-8 mx-auto" />
+                  ) : (
+                    ""
+                  ),
+                  d?.witnessOne?.signatureImage ? (
+                    <img
+                      src={d.witnessOne.signatureImage}
+                      className="h-8 mx-auto"
+                    />
+                  ) : (
+                    ""
+                  ),
+                  d?.witnessTwo?.signatureImage ? (
+                    <img
+                      src={d.witnessTwo.signatureImage}
+                      className="h-8 mx-auto"
+                    />
+                  ) : (
+                    ""
+                  ),
+                ],
               ].map((row, idx) => (
                 <tr key={idx}>
                   {row.map((cell, i) => (
                     <td key={i} className="border p-1 h-8">
-                      {cell || ""}
+                      {cell}
                     </td>
                   ))}
                 </tr>
               ))}
-
             </tbody>
           </table>
-
         </div>
       </div>
 
-      {/* PRINT BUTTON */}
       <button
         onClick={handlePrint}
         className="mt-3 w-full bg-blue-600 text-white py-2 rounded"

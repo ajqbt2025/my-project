@@ -44,7 +44,7 @@ exports.saveMaritalCertificate = async (req, res) => {
       client: client._id,
 
       maritalStatus: req.body.maritalStatus,
-
+    masjidRegisterNumber: req.body.masjidRegisterNumber,
       nikahDetails: {
         nikahDate: req.body["nikahDetails[nikahDate]"],
         hijriDate: req.body["nikahDetails[hijriDate]"],

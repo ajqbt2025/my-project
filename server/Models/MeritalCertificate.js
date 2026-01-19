@@ -22,6 +22,11 @@ const maritalCertificateSchema = new mongoose.Schema(
       unique: true,
       index: true,
     },
+    masjidRegisterNumber: {
+      type: String,
+      required: true,
+    },
+
 
     certificateFile: {
       type: String,

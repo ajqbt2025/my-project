@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useLocation } from "react-router-dom";
 import { useReactToPrint } from "react-to-print";
 import { downloadIdCard } from "../../services/operations/CertifiedService";
@@ -13,14 +13,13 @@ const IdCardPage = () => {
 
   const [searchLoading, setSearchLoading] = useState(false);
   const [downloadLoading, setDownloadLoading] = useState(false);
-  const [printLoading, setPrintLoading] = useState(false);
 
   const token = localStorage.getItem("token");
 
   const printRef = useRef(null);
 
   // =============================
-  // 🖨 PRINT (NO NEW PAGE, NO DATE)
+  // 🖨 PRINT (SAME PAGE, NO DATE)
   // =============================
   const handlePrint = useReactToPrint({
     contentRef: printRef,
@@ -55,9 +54,9 @@ const IdCardPage = () => {
   });
 
   // =============================
-  // 🔍 SEARCH FUNCTION
+  // 🔍 SEARCH FUNCTION (FIXED)
   // =============================
-  const handleSearch = async () => {
+  const handleSearch = useCallback(async () => {
     if (!clientId) {
       alert("Please enter Client ID (AJQFT-XXXX)");
       return;
@@ -79,7 +78,7 @@ const IdCardPage = () => {
     } finally {
       setSearchLoading(false);
     }
-  };
+  }, [clientId, token]);
 
   // =============================
   // 🚀 AUTO SEARCH ON MOUNT
@@ -88,7 +87,7 @@ const IdCardPage = () => {
     if (passedClientId) {
       handleSearch();
     }
-  }, [passedClientId]);
+  }, [passedClientId, handleSearch]);
 
   // =============================
   // ⬇ DOWNLOAD
@@ -126,7 +125,6 @@ const IdCardPage = () => {
           ID Card Download
         </h2>
 
-        {/* 🔍 SEARCH BAR */}
         <MultiSearchBar
           fields={[
             {
@@ -141,7 +139,6 @@ const IdCardPage = () => {
           buttonText="Search ID Card"
         />
 
-        {/* 🆔 PREVIEW */}
         {idCardImage && (
           <>
             <div
@@ -166,10 +163,9 @@ const IdCardPage = () => {
 
               <button
                 onClick={handlePrint}
-                disabled={printLoading}
                 className="flex-1 rounded-md py-2 font-semibold bg-blue-200"
               >
-                {printLoading ? "Printing..." : "🖨 Print"}
+                🖨 Print
               </button>
             </div>
           </>

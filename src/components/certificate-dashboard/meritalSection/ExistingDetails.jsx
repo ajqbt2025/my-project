@@ -8,9 +8,35 @@ export default function ExistingDetails({ maritalDetails }) {
   const printRef = useRef(null);
 
   const handlePrint = useReactToPrint({
-    contentRef: printRef,
-    documentTitle: "Register Entry",
-  });
+  contentRef: printRef,
+  documentTitle: "",
+  pageStyle: `
+    @page {
+      size: A4 landscape;
+      margin: 25mm 10mm 12mm 10mm;
+    }
+
+    @media print {
+      body {
+        margin: 0;
+        padding: 0;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .print-root {
+        padding-top: 10mm !important;
+        box-sizing: border-box;
+      }
+
+      button {
+        display: none !important;
+      }
+    }
+  `,
+});
+
+
 
   const d = maritalDetails;
 
@@ -28,47 +54,12 @@ export default function ExistingDetails({ maritalDetails }) {
 
   return (
     <>
-      <style>
-        {`
-        @media print {
-          body {
-            -webkit-print-color-adjust: exact;
-            print-color-adjust: exact;
-          }
-
-          @page {
-            size: A4 landscape;
-            margin: 10mm;
-          }
-
-          .print-root {
-            transform: scale(0.95);
-            transform-origin: top left;
-          }
-
-          table {
-            border-collapse: collapse !important;
-          }
-
-          th, td {
-            border: 1px solid #000 !important;
-            padding: 4px !important;
-            vertical-align: middle;
-          }
-
-          img {
-            max-height: 28px !important;
-            object-fit: contain !important;
-          }
-        }
-        `}
-      </style>
-
       <div className="w-full overflow-x-auto">
         <div
           ref={printRef}
-          className="print-root bg-white text-black p-3 text-xs sm:text-sm min-w-[1000px] sm:mx-auto border scale-[0.9] sm:scale-100 origin-top-left"
+          className="print-root bg-white text-black p-3 pt-6 text-xs sm:text-sm mx-auto border"
         >
+          {/* HEADER */}
           <div className="border w-full p-2">
             <div className="flex items-center justify-between">
               <img src={logo} alt="Society Logo" className="h-10 sm:h-16 object-contain" />
@@ -108,6 +99,7 @@ export default function ExistingDetails({ maritalDetails }) {
             </div>
           </div>
 
+          {/* DETAILS */}
           <div className="grid grid-cols-6 text-center mt-2 text-[10px] sm:text-sm">
             {[
               ["Date Of Hijri", d?.nikahDetails?.hijriDate],
@@ -119,22 +111,23 @@ export default function ExistingDetails({ maritalDetails }) {
             ].map(([label, value], i) => (
               <div key={i} className="border p-1">
                 <p className="font-semibold">{label}</p>
-                <p className="mt-1">{value || "—"}</p>
+                <p>{value || "—"}</p>
               </div>
             ))}
           </div>
 
+          {/* TABLE */}
           <table className="w-full mt-2 border text-center text-[10px] sm:text-sm">
             <thead>
               <tr>
-                <th className="border">No.</th>
-                <th className="border">Type</th>
-                <th className="border">Groom</th>
-                <th className="border">Bride</th>
-                <th className="border">Qazi</th>
-                <th className="border">Wakil</th>
-                <th className="border">Witness 1</th>
-                <th className="border">Witness 2</th>
+                <th>No.</th>
+                <th>Type</th>
+                <th>Groom</th>
+                <th>Bride</th>
+                <th>Qazi</th>
+                <th>Wakil</th>
+                <th>Witness 1</th>
+                <th>Witness 2</th>
               </tr>
             </thead>
 
@@ -165,15 +158,15 @@ export default function ExistingDetails({ maritalDetails }) {
         </div>
       </div>
 
-     <div className="sticky bottom-0 left-0 flex justify-center items-center p-2 sm:static sm:p-0 border-t sm:border-0">
-  <button
-    onClick={handlePrint}
-    className="w-full sm:w-auto bg-blue-600 text-white py-3 sm:py-2 px-6 rounded"
-  >
-    🖨 Print Register Page
-  </button>
-</div>
-
+      {/* PRINT BUTTON */}
+      <div className="flex justify-center mt-3">
+        <button
+          onClick={handlePrint}
+          className="bg-blue-600 text-white py-2 px-6 rounded"
+        >
+          🖨 Print Register Page
+        </button>
+      </div>
     </>
   );
 }

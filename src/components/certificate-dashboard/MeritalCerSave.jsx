@@ -1,43 +1,73 @@
-
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import toast from "react-hot-toast";
+import { useLocation } from "react-router-dom";
 
 import {
   getMaritalCertificateByRegisterNoService,
 } from "../../services/operations/CertifiedService";
 
-import SearchSection from "./meritalSection/SearchSection";
 import ExistingDetails from "./meritalSection/ExistingDetails";
 import MaritalForm from "./meritalSection/MaritalForm";
-import MultiSearchBar from "../../pages/ClientSearchBar"
+import MultiSearchBar from "../../pages/ClientSearchBar";
 
-import { useLocation } from "react-router-dom";
-import { useEffect } from "react";
 export default function MaritalCertificatePage() {
-const location = useLocation();
- 
+  const location = useLocation();
+
   const [registerNo, setRegisterNo] = useState("");
   const [groomAadhaar, setGroomAadhaar] = useState("");
 
   const [maritalDetails, setMaritalDetails] = useState(null);
   const [showForm, setShowForm] = useState(false);
+
+  // =============================
+  // 🔍 SEARCH FUNCTION (FIXED)
+  // =============================
+  const handleSearch = useCallback(async () => {
+    const reg = registerNo?.toString().trim();
+    const aad = groomAadhaar?.toString().trim();
+
+    if (!reg || !aad) {
+      toast.error("Register Number aur Dulhe ka Aadhaar dono required");
+      return;
+    }
+
+    setMaritalDetails(null);
+
+    const res = await getMaritalCertificateByRegisterNoService({
+      registerNumber: reg,
+      groomAadhaar: aad,
+    });
+
+    if (res?.success) {
+      setMaritalDetails(res.maritalCertificate);
+      toast.success("Certificate found");
+    } else {
+      toast.error("No record found");
+    }
+  }, [registerNo, groomAadhaar]);
+
+  // =============================
+  // 📥 AUTO FILL FROM ROUTE STATE
+  // =============================
   useEffect(() => {
-  if (location.state) {
+    if (location.state) {
+      setRegisterNo(location.state.registerNumber || "");
+      setGroomAadhaar(location.state.groomAadhaar || "");
+    }
+  }, [location.state]);
 
-    setRegisterNo(location.state.registerNumber || "");
-    setGroomAadhaar(location.state.groomAadhaar || "");
-  }
-}, [location.state]);
+  // =============================
+  // 🚀 AUTO SEARCH WHEN BOTH FILLED
+  // =============================
+  useEffect(() => {
+    if (registerNo && groomAadhaar) {
+      handleSearch();
+    }
+  }, [registerNo, groomAadhaar, handleSearch]);
 
-// auto search only when both filled
-useEffect(() => {
-  if (registerNo && groomAadhaar) {
-    handleSearch();
-  }
-}, [registerNo, groomAadhaar]);
-
-
-
+  // =============================
+  // 🧹 CLEAR
+  // =============================
   const handleClear = () => {
     setRegisterNo("");
     setGroomAadhaar("");
@@ -45,37 +75,10 @@ useEffect(() => {
     setShowForm(false);
   };
 
-  const handleSearch = async () => {
-
-  const reg = registerNo?.toString().trim();
-  const aad = groomAadhaar?.toString().trim();
-
-  if (!reg || !aad) {
-    toast.error("Register Number aur Dulhe ka Aadhaar dono required");
-    return;
-  }
-
-  setMaritalDetails(null);
-
-  const res = await getMaritalCertificateByRegisterNoService({
-    registerNumber: reg,
-    groomAadhaar: aad,
-  });
-
-  if (res?.success) {
-    setMaritalDetails(res.maritalCertificate);
-    toast.success("Certificate found");
-  } else {
-    toast.error("No record found");
-  }
-};
-
-
-
   return (
     <div className="max-w-5xl mx-auto space-y-6">
 
-    <MultiSearchBar
+      <MultiSearchBar
         loading={false}
         onSearch={handleSearch}
         buttonText="Search Certificate"
@@ -94,8 +97,8 @@ useEffect(() => {
           },
         ]}
       />
-      <div className="flex gap-3">
 
+      <div className="flex gap-3">
         <button
           onClick={() => setShowForm(true)}
           className="rounded bg-caribbeangreen-200 text-black px-4 py-2 font-semibold"
@@ -109,21 +112,15 @@ useEffect(() => {
         >
           Clear Search
         </button>
-
       </div>
-
-
 
       {maritalDetails && (
         <ExistingDetails maritalDetails={maritalDetails} />
       )}
 
       {showForm && (
-        <MaritalForm
-          onClose={() => setShowForm(false)}
-        />
+        <MaritalForm onClose={() => setShowForm(false)} />
       )}
-
     </div>
   );
 }

@@ -1,6 +1,5 @@
 import React, { useRef } from "react";
 import { useReactToPrint } from "react-to-print";
-
 import logo2 from "../../../assests/buttonImage/from logo.png";
 import logo from "../../../assests/head logo2.png";
 

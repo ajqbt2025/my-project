@@ -13,6 +13,18 @@ export default function ExistingDetails({ maritalDetails }) {
 
   const d = maritalDetails;
 
+  const fixImageUrl = (url) =>
+    url ? url.replace("/raw/upload/", "/image/upload/") : null;
+
+  const Sig = ({ src, alt }) =>
+    src ? (
+      <img
+        src={fixImageUrl(src)}
+        alt={alt}
+        className="h-8 mx-auto object-contain"
+      />
+    ) : null;
+
   return (
     <>
       <div className="w-full overflow-auto">
@@ -23,7 +35,11 @@ export default function ExistingDetails({ maritalDetails }) {
           <div className="border w-full p-2">
             <div className="flex justify-between items-center">
               <div className="w-[15%] flex justify-center">
-                <img src={logo} alt="Society Logo" className="h-16" />
+                <img
+                  src={logo}
+                  alt="Society Logo"
+                  className="h-16 object-contain"
+                />
               </div>
 
               <div className="w-[55%] text-center">
@@ -42,11 +58,23 @@ export default function ExistingDetails({ maritalDetails }) {
               </div>
 
               <div className="w-[15%] flex justify-center">
-                <img src={logo2} alt="Masjid Logo" className="h-16" />
+                <img
+                  src={logo2}
+                  alt="Masjid Logo"
+                  className="h-16 object-contain"
+                />
               </div>
             </div>
 
-            <div className="flex justify-end mt-2">
+            <div className="flex justify-end gap-3 mt-2">
+              <div className="border px-4 py-2 text-sm text-center">
+                Masjid Reg. No
+                <br />
+                <span className="font-bold">
+                  {d?.masjidRegisterNumber || "—"}
+                </span>
+              </div>
+
               <div className="border px-4 py-2 text-sm text-center">
                 Society Reg. No
                 <br />
@@ -140,24 +168,12 @@ export default function ExistingDetails({ maritalDetails }) {
                 [
                   "6",
                   "Signature",
-                  d?.groom?.signatureImage ? (
-                    <img src={d.groom.signatureImage} alt="Groom Signature" className="h-8 mx-auto" />
-                  ) : "",
-                  d?.bride?.signatureImage ? (
-                    <img src={d.bride.signatureImage} alt="Bride Signature" className="h-8 mx-auto" />
-                  ) : "",
-                  d?.qazi?.signatureImage ? (
-                    <img src={d.qazi.signatureImage} alt="Qazi Signature" className="h-8 mx-auto" />
-                  ) : "",
-                  d?.wakil?.signatureImage ? (
-                    <img src={d.wakil.signatureImage} alt="Wakil Signature" className="h-8 mx-auto" />
-                  ) : "",
-                  d?.witnessOne?.signatureImage ? (
-                    <img src={d.witnessOne.signatureImage} alt="Witness One Signature" className="h-8 mx-auto" />
-                  ) : "",
-                  d?.witnessTwo?.signatureImage ? (
-                    <img src={d.witnessTwo.signatureImage} alt="Witness Two Signature" className="h-8 mx-auto" />
-                  ) : "",
+                  <Sig src={d?.groom?.signatureImage} alt="Groom Signature" />,
+                  <Sig src={d?.bride?.signatureImage} alt="Bride Signature" />,
+                  <Sig src={d?.qazi?.signatureImage} alt="Qazi Signature" />,
+                  <Sig src={d?.wakil?.signatureImage} alt="Wakil Signature" />,
+                  <Sig src={d?.witnessOne?.signatureImage} alt="Witness One Signature" />,
+                  <Sig src={d?.witnessTwo?.signatureImage} alt="Witness Two Signature" />,
                 ],
               ].map((row, idx) => (
                 <tr key={idx}>

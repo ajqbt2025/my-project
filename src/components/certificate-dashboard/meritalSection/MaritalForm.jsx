@@ -42,6 +42,8 @@ export default function MaritalCertificateForm({ onClose }) {
       formData.append("nikahDetails[nikahCategory]", data.nikahCategory);
       formData.append("nikahDetails[venue]", data.venue);
       formData.append("nikahDetails[masjidName]", data.masjidName);
+      formData.append("masjidRegisterNumber", data.masjidRegisterNumber);
+
 
       // REQUIRED MAIN CERTIFICATE FILE
       if (data.certificateFile?.[0]) {
@@ -127,6 +129,19 @@ export default function MaritalCertificateForm({ onClose }) {
           <p className="text-red-400 text-sm">Client ID required</p>
         )}
       </div>
+
+      <div>
+  <label>Masjid Register Number *</label>
+  <input
+    {...register("masjidRegisterNumber", { required: true })}
+    placeholder="Masjid Register No."
+    className="w-full rounded bg-richblack-900 p-2"
+  />
+  {errors.masjidRegisterNumber && (
+    <p className="text-red-400 text-sm">Masjid register number required</p>
+  )}
+</div>
+
 
       {/* MAIN CERTIFICATE FILE */}
       <div>

@@ -1,10 +1,10 @@
-import React, { useState, useEffect ,useCallback } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
+import { useReactToPrint } from "react-to-print";
 import { downloadIdCard } from "../../services/operations/CertifiedService";
 import MultiSearchBar from "../../pages/ClientSearchBar";
 
 const IdCardPage = () => {
-
   const location = useLocation();
   const passedClientId = location?.state?.clientId || "";
 
@@ -17,10 +17,47 @@ const IdCardPage = () => {
 
   const token = localStorage.getItem("token");
 
+  const printRef = useRef(null);
+
+  // =============================
+  // 🖨 PRINT (NO NEW PAGE, NO DATE)
+  // =============================
+  const handlePrint = useReactToPrint({
+    contentRef: printRef,
+    documentTitle: "",
+    pageStyle: `
+      @page {
+        size: auto;
+        margin: 0;
+      }
+
+      @media print {
+        html, body {
+          margin: 0;
+          padding: 0;
+        }
+
+        body {
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+
+        img {
+          max-width: 100%;
+          height: auto;
+        }
+
+        button {
+          display: none !important;
+        }
+      }
+    `,
+  });
+
   // =============================
   // 🔍 SEARCH FUNCTION
   // =============================
- const handleSearch = useCallback(async () => {
+  const handleSearch = async () => {
     if (!clientId) {
       alert("Please enter Client ID (AJQFT-XXXX)");
       return;
@@ -38,12 +75,11 @@ const IdCardPage = () => {
         alert("ID Card not found");
       }
     } catch (error) {
-      console.error(error);
       alert("Failed to fetch ID Card");
     } finally {
       setSearchLoading(false);
     }
-  }, [clientId, token]);
+  };
 
   // =============================
   // 🚀 AUTO SEARCH ON MOUNT
@@ -52,7 +88,7 @@ const IdCardPage = () => {
     if (passedClientId) {
       handleSearch();
     }
-  }, [passedClientId, handleSearch]);
+  }, [passedClientId]);
 
   // =============================
   // ⬇ DOWNLOAD
@@ -75,42 +111,11 @@ const IdCardPage = () => {
       link.click();
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
-
     } catch (error) {
       alert("Download failed");
     } finally {
       setDownloadLoading(false);
     }
-  };
-
-  // =============================
-  // 🖨 PRINT
-  // =============================
-  const handlePrint = () => {
-    if (!idCardImage) return;
-
-    setPrintLoading(true);
-
-    const printWindow = window.open("", "_blank");
-
-    printWindow.document.write(`
-      <html>
-        <head>
-          <title>ID Card</title>
-        </head>
-        <body>
-          <img src="${idCardImage}" />
-          <script>
-            window.print();
-            window.onafterprint = () => window.close();
-          </script>
-        </body>
-      </html>
-    `);
-
-    printWindow.document.close();
-
-    setTimeout(() => setPrintLoading(false), 1000);
   };
 
   return (
@@ -128,8 +133,8 @@ const IdCardPage = () => {
               label: "Client ID",
               value: clientId,
               onChange: setClientId,
-              placeholder: "AJQFT-XXXX-XXXX"
-            }
+              placeholder: "AJQFT-XXXX-XXXX",
+            },
           ]}
           onSearch={handleSearch}
           loading={searchLoading}
@@ -139,11 +144,14 @@ const IdCardPage = () => {
         {/* 🆔 PREVIEW */}
         {idCardImage && (
           <>
-            <div className="rounded-lg border border-richblack-700 bg-richblack-900 p-4">
+            <div
+              ref={printRef}
+              className="rounded-lg border border-richblack-700 bg-white p-4"
+            >
               <img
                 src={idCardImage}
                 alt="ID Card"
-                className="mx-auto max-w-sm rounded-md"
+                className="mx-auto max-w-sm"
               />
             </div>
 
@@ -166,7 +174,6 @@ const IdCardPage = () => {
             </div>
           </>
         )}
-
       </div>
     </div>
   );

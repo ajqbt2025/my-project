@@ -1,7 +1,9 @@
 import React, { useRef } from "react";
 import { useReactToPrint } from "react-to-print";
-export default function ExistingDetails({ maritalDetails }) {
+import logo2 from "../../../assests/Logo.png";
+import logo from "../../../assests/head logo2.png";
 
+export default function ExistingDetails({ maritalDetails }) {
   const printRef = useRef(null);
 
   const handlePrint = useReactToPrint({
@@ -19,8 +21,12 @@ export default function ExistingDetails({ maritalDetails }) {
           className="bg-white text-black p-4 text-sm min-w-[1000px] mx-auto border"
         >
           <div className="border w-full p-2">
-            <div className="flex justify-between items-start">
-              <div className="w-[65%] text-center">
+            <div className="flex justify-between items-center">
+              <div className="w-[15%] flex justify-center">
+                <img src={logo} alt="Society Logo" className="h-16" />
+              </div>
+
+              <div className="w-[55%] text-center">
                 <h2 className="text-xl font-bold">
                   Al-Jamiyatul Quresh Fraternity
                 </h2>
@@ -35,20 +41,16 @@ export default function ExistingDetails({ maritalDetails }) {
                 </p>
               </div>
 
-              <div className="flex gap-2">
-                <div className="border px-3 py-2 text-sm text-center">
-                  Masjid Reg. No
-                  <br />
-                  <span className="font-bold">
-                    {d?.masjidRegisterNumber || "—"}
-                  </span>
-                </div>
+              <div className="w-[15%] flex justify-center">
+                <img src={logo2} alt="Masjid Logo" className="h-16" />
+              </div>
+            </div>
 
-                <div className="border px-3 py-2 text-sm text-center">
-                  Society Reg. No
-                  <br />
-                  <span className="font-bold">{d?.registerNumber}</span>
-                </div>
+            <div className="flex justify-end mt-2">
+              <div className="border px-4 py-2 text-sm text-center">
+                Society Reg. No
+                <br />
+                <span className="font-bold">{d?.registerNumber}</span>
               </div>
             </div>
           </div>
@@ -139,41 +141,23 @@ export default function ExistingDetails({ maritalDetails }) {
                   "6",
                   "Signature",
                   d?.groom?.signatureImage ? (
-                    <img src={d.groom.signatureImage} className="h-8 mx-auto" />
-                  ) : (
-                    ""
-                  ),
+                    <img src={d.groom.signatureImage} alt="Groom Signature" className="h-8 mx-auto" />
+                  ) : "",
                   d?.bride?.signatureImage ? (
-                    <img src={d.bride.signatureImage} className="h-8 mx-auto" />
-                  ) : (
-                    ""
-                  ),
+                    <img src={d.bride.signatureImage} alt="Bride Signature" className="h-8 mx-auto" />
+                  ) : "",
                   d?.qazi?.signatureImage ? (
-                    <img src={d.qazi.signatureImage} className="h-8 mx-auto" />
-                  ) : (
-                    ""
-                  ),
+                    <img src={d.qazi.signatureImage} alt="Qazi Signature" className="h-8 mx-auto" />
+                  ) : "",
                   d?.wakil?.signatureImage ? (
-                    <img src={d.wakil.signatureImage} className="h-8 mx-auto" />
-                  ) : (
-                    ""
-                  ),
+                    <img src={d.wakil.signatureImage} alt="Wakil Signature" className="h-8 mx-auto" />
+                  ) : "",
                   d?.witnessOne?.signatureImage ? (
-                    <img
-                      src={d.witnessOne.signatureImage}
-                      className="h-8 mx-auto"
-                    />
-                  ) : (
-                    ""
-                  ),
+                    <img src={d.witnessOne.signatureImage} alt="Witness One Signature" className="h-8 mx-auto" />
+                  ) : "",
                   d?.witnessTwo?.signatureImage ? (
-                    <img
-                      src={d.witnessTwo.signatureImage}
-                      className="h-8 mx-auto"
-                    />
-                  ) : (
-                    ""
-                  ),
+                    <img src={d.witnessTwo.signatureImage} alt="Witness Two Signature" className="h-8 mx-auto" />
+                  ) : "",
                 ],
               ].map((row, idx) => (
                 <tr key={idx}>

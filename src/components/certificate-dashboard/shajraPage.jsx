@@ -92,32 +92,69 @@ export default function ShajrahForm() {
       handleSearch(autoClient);
     }
   }, [autoClient, setValue, handleSearch]);
-  const handlePrint = () => {
-    if (!shajrahData?.shajrahImage) return;
+ const handlePrint = () => {
+  if (!shajrahData?.shajrahImage) return;
 
-    setPrintLoading(true);
+  setPrintLoading(true);
 
-    const printWindow = window.open("", "_blank");
+  const iframe = document.createElement("iframe");
+  iframe.style.position = "fixed";
+  iframe.style.right = "0";
+  iframe.style.bottom = "0";
+  iframe.style.width = "0";
+  iframe.style.height = "0";
+  iframe.style.border = "0";
 
-    printWindow.document.write(`
+  document.body.appendChild(iframe);
+
+  const doc = iframe.contentWindow.document;
+
+  doc.open();
+  doc.write(`
+    <!DOCTYPE html>
     <html>
       <head>
         <title>Shajrah</title>
+        <style>
+          @page {
+            size: A4 portrait;
+            margin: 8mm;
+          }
+
+          body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+          }
+
+          img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+          }
+        </style>
       </head>
       <body>
-        <img src="${shajrahData.shajrahImage}" style="max-width:100%;"/>
-        <script>
-          window.print();
-          window.onafterprint = () => window.close();
-        </script>
+        <img src="${shajrahData.shajrahImage}" />
       </body>
     </html>
   `);
+  doc.close();
 
-    printWindow.document.close();
+  iframe.onload = () => {
+    iframe.contentWindow.focus();
+    iframe.contentWindow.print();
 
-    setTimeout(() => setPrintLoading(false), 1000);
+    setTimeout(() => {
+      document.body.removeChild(iframe);
+      setPrintLoading(false);
+    }, 1000);
   };
+};
 
   const handleDownload = async () => {
     if (!shajrahData?.shajrahImage) return;

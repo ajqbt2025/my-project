@@ -276,8 +276,8 @@ export default function ApplicationNotice({ type }) {
       footer: "براہ کرم فارم ڈاؤن لوڈ کر کے محفوظ رکھیں اور پرنٹ بھی نکال لیں۔",
       btn: "درخواست دیں"
     }
-  }
-};
+  
+},
 
     // ---------------- MARITAL ----------------
     

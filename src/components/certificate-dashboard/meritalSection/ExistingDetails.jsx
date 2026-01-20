@@ -136,7 +136,7 @@ export default function ExistingDetails({ maritalDetails }) {
                 ["2","Father Name",d?.groom?.fatherName,d?.bride?.fatherName,d?.qazi?.fatherName,d?.wakil?.fatherName,d?.witnessOne?.fatherName,d?.witnessTwo?.fatherName],
                 ["3","Age",d?.groom?.age,d?.bride?.age,d?.qazi?.age,d?.wakil?.age,d?.witnessOne?.age,d?.witnessTwo?.age],
                 ["4","Occupation",d?.groom?.occupation,d?.bride?.occupation,d?.qazi?.occupation,d?.wakil?.occupation,d?.witnessOne?.occupation,d?.witnessTwo?.occupation],
-                ["5","Home Town",d?.groom?.address,d?.bride?.address,d?.qazi?.address,d?.wakil?.address,d?.witnessOne?.address,d?.witnessTwo?.address],
+                ["5","Address",d?.groom?.address,d?.bride?.address,d?.qazi?.address,d?.wakil?.address,d?.witnessOne?.address,d?.witnessTwo?.address],
                 ["6","Signature",
                   <Sig src={d?.groom?.signatureImage} alt="Groom Signature" />,
                   <Sig src={d?.bride?.signatureImage} alt="Bride Signature" />,

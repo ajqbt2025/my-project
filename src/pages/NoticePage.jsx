@@ -444,7 +444,9 @@ export default function ApplicationNotice({ type }) {
     footer: "براہِ کرم اس فارم کو ڈاؤن لوڈ کریں اور پرنٹ ضرور کریں۔",
     btn: "درخواست دیں"
   }
+    }
 };
+  
 
 
   const current = content[type]?.[lang] || content.client.en;

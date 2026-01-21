@@ -1,7 +1,6 @@
 import { useState } from "react";
 import {
   AiOutlineMenu,
-  
   AiOutlineClose,
   AiOutlineHome,
   AiOutlineSearch,
@@ -15,13 +14,10 @@ import { Link, matchPath, useLocation } from "react-router-dom";
 import logo from "../../assests/head logo2.png";
 import logo2 from "../../assests/head logo.png";
 import { NavbarLinks } from "../../data/navbar-links";
-
 import ProfileDropdown from "../core/Auth/ProfileDropdown";
 import { details_links } from "../../data/detailsLink";
-
 function Navbar() {
   const { token } = useSelector((state) => state.auth);
-
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
@@ -115,7 +111,11 @@ function Navbar() {
                   Log in
                 </button>
               </Link>
-              
+              <Link to="/signup">
+                <button className="rounded-[8px] border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100">
+                  Sign up
+                </button>
+              </Link>
             </>
           ) : (
             <ProfileDropdown />
@@ -164,7 +164,11 @@ function Navbar() {
                     Log in
                   </button>
                 </Link>
-                
+                <Link to="/signup" onClick={() => setMobileMenuOpen(false)}>
+                  <button className="w-28 rounded-md border border-richblack-700 bg-richblack-800 px-4 py-2 text-richblack-100">
+                    Sign up
+                  </button>
+                </Link>
               </>
             ) : (
               <ProfileDropdown />
@@ -256,113 +260,3 @@ function Navbar() {
 
 export default Navbar;
 
-
-// import { useState } from "react";
-// import { Link } from "react-router-dom";
-// import { useSelector } from "react-redux";
-// import { BsChevronDown } from "react-icons/bs";
-// import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
-
-// import logoRound from "../../assests/Logo.png";
-// import logoText from "../../assests/head logo.png";
-// import { NavbarLinks } from "../../data/navbar-links";
-// import { details_links } from "../../data/detailsLink";
-// import ProfileDropdown from "../core/Auth/ProfileDropdown";
-
-// export default function Navbar() {
-//   const { token } = useSelector((state) => state.auth);
-//   const [mobileOpen, setMobileOpen] = useState(false);
-
-//   return (
-//     <>
-//       {/* ================= TOP IDENTITY BAR ================= */}
-//       <div className="w-full bg-richblack-900 border-b border-richblack-700">
-//         <div className="mx-auto max-w-maxContent px-6 py-3 flex items-center justify-between">
-
-//           {/* LOGO AREA */}
-//           <Link to="/" className="flex items-center gap-4">
-//             <img
-//               src={logoRound}
-//               alt="AJQB"
-//               className="h-12 w-12 rounded-full bg-white p-1"
-//             />
-//             <img
-//               src={logoText}
-//               alt="All India Jamiat-ul-Quresh"
-//               className="h-9 object-contain"
-//             />
-//           </Link>
-
-//           {/* RIGHT INFO / PROFILE */}
-//           <div className="hidden md:flex items-center gap-6 text-sm text-richblack-100">
-//             <span>Reg. No: AJQB/IND/1947</span>
-//             {token ? <ProfileDropdown /> : null}
-//           </div>
-
-//           {/* MOBILE ICON */}
-//           <button
-//             onClick={() => setMobileOpen(!mobileOpen)}
-//             className="md:hidden text-richblack-100"
-//           >
-//             {mobileOpen ? <AiOutlineClose size={24} /> : <AiOutlineMenu size={24} />}
-//           </button>
-//         </div>
-//       </div>
-
-//       {/* ================= NAVIGATION BAR ================= */}
-//       <div className="w-full bg-richblack-800 border-b border-richblack-700">
-//         <div className="mx-auto max-w-maxContent px-6">
-
-//           {/* DESKTOP MENU */}
-//           <ul className="hidden md:flex items-center gap-8 py-3 text-sm text-richblack-100">
-//             {NavbarLinks.map((link) =>
-//               link.title === "More" ? (
-//                 <li key={link.title} className="relative group cursor-pointer">
-//                   <div className="flex items-center gap-1 hover:text-yellow-50">
-//                     More <BsChevronDown size={14} />
-//                   </div>
-//                   <div className="invisible absolute top-8 left-0 w-48 bg-richblack-900 border border-richblack-700 rounded-lg opacity-0 group-hover:visible group-hover:opacity-100 transition">
-//                     {details_links.map((item) => (
-//                       <Link
-//                         key={item.id}
-//                         to={item.path}
-//                         className="block px-4 py-2 hover:bg-richblack-700"
-//                       >
-//                         {item.title}
-//                       </Link>
-//                     ))}
-//                   </div>
-//                 </li>
-//               ) : (
-//                 <li key={link.title}>
-//                   <Link
-//                     to={link.path}
-//                     className="hover:text-yellow-50"
-//                   >
-//                     {link.title}
-//                   </Link>
-//                 </li>
-//               )
-//             )}
-//           </ul>
-
-//           {/* MOBILE MENU */}
-//           {mobileOpen && (
-//             <div className="md:hidden flex flex-col gap-4 py-4 text-richblack-100">
-//               {NavbarLinks.map((link) => (
-//                 <Link
-//                   key={link.title}
-//                   to={link.path}
-//                   onClick={() => setMobileOpen(false)}
-//                   className="hover:text-yellow-50"
-//                 >
-//                   {link.title}
-//                 </Link>
-//               ))}
-//             </div>
-//           )}
-//         </div>
-//       </div>
-//     </>
-//   );
-// }

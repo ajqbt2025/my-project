@@ -3,20 +3,19 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { IoAddCircleOutline } from "react-icons/io5";
 import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 import { grandparentDetails } from "../../../../services/operations/ClientService";
 import { setGrandParent } from "../../../../slices/clientSlice";
-import { useNavigate } from "react-router-dom";
 
 const GrandparentDetailsPage = ({ loading }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
-    const { token } = useSelector((state) => state.auth);
+  const { token } = useSelector((state) => state.auth);
 
   const onSubmit = async (data) => {
     try {
-      // ---------- FormData (for image upload) ----------
       const formData = new FormData();
 
       Object.keys(data).forEach((key) => {
@@ -27,8 +26,7 @@ const GrandparentDetailsPage = ({ loading }) => {
         formData.append("image", data.image[0]);
       }
 
-      // ---------- API Call ----------
-      const result = await dispatch(grandparentDetails(formData,token));
+      const result = await dispatch(grandparentDetails(formData, token));
 
       if (result?.grandParentId) {
         dispatch(
@@ -41,17 +39,15 @@ const GrandparentDetailsPage = ({ loading }) => {
         toast.success("Grandparent details saved successfully!");
         reset();
         navigate("/dashboard/create-client");
-
       } else {
         toast.error("Failed to save grandparent details");
       }
     } catch (error) {
-      console.error(error);
       toast.error("Error submitting grandparent details");
     }
   };
 
-return (
+  return (
     <div className="form-container">
       <h2 className="form-title">Grandparent Details</h2>
 
@@ -60,7 +56,6 @@ return (
         encType="multipart/form-data"
         className="space-y-5"
       >
-        {/* Image Upload */}
         <FileField
           id="image"
           label="Upload Image"
@@ -71,6 +66,8 @@ return (
         <div className="form-grid-2">
           <InputField id="full_name" label="Full Name" register={register} errors={errors} />
           <InputField id="father_name" label="Father Name" register={register} errors={errors} />
+          <InputField id="mother_name" label="Mother Name" register={register} errors={errors} />
+          <InputField id="grand_mother_name" label="Grand Mother Name" register={register} errors={errors} />
           <InputField id="dob" label="Date of Birth" type="date" register={register} errors={errors} />
           <InputField id="birth_place" label="Birth Place" register={register} errors={errors} />
           <InputField id="uidai" label="UIDAI Number" register={register} errors={errors} />
@@ -107,7 +104,6 @@ return (
 
 export default GrandparentDetailsPage;
 
-/* ---------- Helper Components ---------- */
 const InputField = ({ id, label, register, errors, type = "text" }) => (
   <div>
     <label className="form-label">

@@ -5,9 +5,6 @@ import { useNavigate } from "react-router-dom"
 import { signInWithGoogle } from "../utils/fireBase"
 import { googleLogin } from "../services/operations/authAPI"
 
-import frameImg from "../assests/frame.png"
-import signupImg from "../assests/signup.webp"
-
 export default function GoogleSignup() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -19,52 +16,28 @@ export default function GoogleSignup() {
   }
 
   return (
-    <div className="grid min-h-[calc(100vh-3.5rem)] place-items-center bg-richblack-900 mb-16">
-      <div className="mx-auto flex w-11/12 max-w-maxContent flex-col-reverse justify-between gap-y-12 py-12 md:flex-row md:gap-x-12">
-        
-        {/* LEFT SECTION */}
-        <div className="mx-auto w-11/12 max-w-[450px] md:mx-0">
-          <h1 className="text-[1.875rem] font-semibold leading-[2.375rem] text-richblack-5">
-            Join the millions learning to code with{" "}
-            <span className="text-blue-100">EduNova</span> for free
-          </h1>
+    <div className="flex min-h-[calc(100vh-3.5rem)] items-center justify-center bg-richblack-900 px-4">
+      <div className="w-full max-w-[420px] rounded-xl bg-richblack-800 p-6 sm:p-8 shadow-lg">
+        <h1 className="text-center text-2xl sm:text-3xl font-semibold text-richblack-5">
+          Welcome to <span className="text-blue-100">EduNova</span>
+        </h1>
 
-          <p className="mt-4 text-[1.125rem] leading-[1.625rem] text-richblack-100">
-            Build skills for today, tomorrow, and beyond.{" "}
-            <span className="font-edu-sa font-bold italic text-blue-100">
-              Education to future-proof your career.
-            </span>
-          </p>
+        <p className="mt-3 text-center text-sm sm:text-base text-richblack-100">
+          Learn skills that matter today and build a better tomorrow with
+          <span className="font-edu-sa italic text-blue-100"> smart education</span>
+        </p>
 
-          <div className="mt-10 flex flex-col items-center gap-4">
-            <button
-              onClick={handleGoogleLogin}
-              className="flex w-full items-center justify-center gap-3 rounded-md border border-richblack-700 bg-richblack-800 py-3 font-medium text-richblack-5 shadow-[0_2px_6px_rgba(0,0,0,0.2)] transition-all duration-200 hover:scale-[1.02] hover:bg-richblack-700"
-            >
-              <FcGoogle className="text-2xl" />
-              <span>Continue with Google</span>
-            </button>
-          </div>
-        </div>
+        <button
+          onClick={handleGoogleLogin}
+          className="mt-8 flex w-full items-center justify-center gap-3 rounded-md border border-richblack-600 bg-richblack-700 py-3 text-sm sm:text-base font-medium text-richblack-5 transition-all duration-200 hover:bg-richblack-600 hover:scale-[1.02]"
+        >
+          <FcGoogle className="text-xl sm:text-2xl" />
+          Continue with Google
+        </button>
 
-        {/* RIGHT SECTION (IMAGE) */}
-        <div className="relative mx-auto w-11/12 max-w-[450px] md:mx-0">
-          <img
-            src={frameImg}
-            alt="Frame"
-            width={558}
-            height={504}
-            loading="lazy"
-          />
-          <img
-            src={signupImg}
-            alt="Students"
-            width={558}
-            height={504}
-            loading="lazy"
-            className="absolute -top-4 right-4 z-10"
-          />
-        </div>
+        <p className="mt-6 text-center text-xs sm:text-sm text-richblack-300">
+          By continuing, you agree to our Terms & Privacy Policy
+        </p>
       </div>
     </div>
   )

@@ -43,10 +43,20 @@ const clientSlice = createSlice({
       if (!state.completedSteps.includes("Personal"))
         state.completedSteps.push("Personal");
     },
+    setPersonalDetailsId: (state, action) => {
+      state.personalDetailsId = action.payload;
+      if (!state.completedSteps.includes("Personal"))
+        state.completedSteps.push("Personal");
+    },
 
     setQualification: (state, action) => {
       state.qualification = action.payload.data;
       state.qualificationId = action.payload.id;
+      if (!state.completedSteps.includes("Qualification"))
+        state.completedSteps.push("Qualification");
+    },
+    setQualificationId: (state, action) => {
+      state.qualificationId = action.payload;
       if (!state.completedSteps.includes("Qualification"))
         state.completedSteps.push("Qualification");
     },
@@ -57,10 +67,20 @@ const clientSlice = createSlice({
       if (!state.completedSteps.includes("Occupation"))
         state.completedSteps.push("Occupation");
     },
+    setOccupationId: (state, action) => {
+      state.occupationId = action.payload;
+      if (!state.completedSteps.includes("Occupation"))
+        state.completedSteps.push("Occupation");
+    },
 
     setPhysicalCondition: (state, action) => {
       state.physicalCondition = action.payload.data;
       state.physicalConditionId = action.payload.id;
+      if (!state.completedSteps.includes("Physical"))
+        state.completedSteps.push("Physical");
+    },
+    setPhysicalConditionId: (state, action) => {
+      state.physicalConditionId = action.payload;
       if (!state.completedSteps.includes("Physical"))
         state.completedSteps.push("Physical");
     },
@@ -71,10 +91,20 @@ const clientSlice = createSlice({
       if (!state.completedSteps.includes("Marital"))
         state.completedSteps.push("Marital");
     },
+    setMaritalStatusId: (state, action) => {
+      state.maritalStatusId = action.payload;
+      if (!state.completedSteps.includes("Marital"))
+        state.completedSteps.push("Marital");
+    },
 
     setFatherGuardian: (state, action) => {
       state.fatherGuardian = action.payload.data;
       state.fatherGuardianId = action.payload.id;
+      if (!state.completedSteps.includes("Relation"))
+        state.completedSteps.push("Relation");
+    },
+    setFatherGuardianId: (state, action) => {
+      state.fatherGuardianId = action.payload;
       if (!state.completedSteps.includes("Relation"))
         state.completedSteps.push("Relation");
     },
@@ -85,6 +115,11 @@ const clientSlice = createSlice({
       if (!state.completedSteps.includes("Grandparent"))
         state.completedSteps.push("Grandparent");
     },
+    setGrandParentId: (state, action) => {
+      state.grandParentId = action.payload;
+      if (!state.completedSteps.includes("Grandparent"))
+        state.completedSteps.push("Grandparent");
+    },
 
     setBankDetails: (state, action) => {
       state.bankDetails = action.payload.data;
@@ -92,13 +127,17 @@ const clientSlice = createSlice({
       if (!state.completedSteps.includes("Bank"))
         state.completedSteps.push("Bank");
     },
+    setBankDetailsId: (state, action) => {
+      state.bankDetailsId = action.payload;
+      if (!state.completedSteps.includes("Bank"))
+        state.completedSteps.push("Bank");
+    },
 
     resetClientState: () => initialState,
 
     addCompletedStep: (state, action) => {
-      if (!state.completedSteps.includes(action.payload)) {
+      if (!state.completedSteps.includes(action.payload))
         state.completedSteps.push(action.payload);
-      }
     },
 
     removeCompletedStep: (state, action) => {
@@ -117,13 +156,21 @@ export const {
   setEditMode,
   setClient,
   setPersonalDetails,
+  setPersonalDetailsId,
   setQualification,
+  setQualificationId,
   setOccupation,
+  setOccupationId,
   setPhysicalCondition,
+  setPhysicalConditionId,
   setMaritalStatus,
+  setMaritalStatusId,
   setFatherGuardian,
+  setFatherGuardianId,
   setGrandParent,
+  setGrandParentId,
   setBankDetails,
+  setBankDetailsId,
   resetClientState,
   addCompletedStep,
   removeCompletedStep,

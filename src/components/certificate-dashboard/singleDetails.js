@@ -59,8 +59,8 @@ const ClientDetail = () => {
         </h1>
 
         <div className="flex justify-between mr-10 ml-10 items-center mb-4">
-          <img src={logo} className="w-[60px]" />
-          <img src={logo2} className="w-[220px]" />
+          <img src={logo} alt="logo" className="w-[60px]" />
+          <img src={logo2} alt="logo2" className="w-[220px]" />
         </div>
 
         {/* ------------- PERSONAL ------------- */}
@@ -82,10 +82,9 @@ const ClientDetail = () => {
 
               <Row label="Mobile" value={personalDetails.mobileNum} />
               <Row label="Email" value={personalDetails.email} />
-              <Row label="Home Town" value={personalDetails.permanentAddress} />
               <Row
-                label="Current Address"
-                value={personalDetails.currentAddress}
+                label="Home Town"
+                value={personalDetails.permanentAddress}
               />
             </div>
 
@@ -201,7 +200,7 @@ const ClientDetail = () => {
                 label="DOB"
                 value={physicalCondition.abnormal_details?.dob?.substring(
                   0,
-                  10,
+                  10
                 )}
               />
               <Row
@@ -220,14 +219,14 @@ const ClientDetail = () => {
                 label="Issue Date"
                 value={physicalCondition.abnormal_details?.issue_date?.substring(
                   0,
-                  10,
+                  10
                 )}
               />
               <Row
                 label="Valid Upto"
                 value={physicalCondition.abnormal_details?.valid_upto?.substring(
                   0,
-                  10,
+                  10
                 )}
               />
               <Row
@@ -306,7 +305,10 @@ const ClientDetail = () => {
           <Row label="UIDAI" value={fatherGuardian.uidai} />
           <Row label="Qualification" value={fatherGuardian.qualification} />
           <Row label="Occupation" value={fatherGuardian.occupation} />
-          <Row label="Home Town" value={fatherGuardian.permanent_address} />
+          <Row
+            label="Home Town"
+            value={fatherGuardian.permanent_address}
+          />
           <Row label="Current Address" value={fatherGuardian.current_address} />
         </Section>
 
@@ -319,24 +321,28 @@ const ClientDetail = () => {
           <Row label="UIDAI" value={grandParent.uidai} />
           <Row label="Qualification" value={grandParent.qualification} />
           <Row label="Occupation" value={grandParent.occupation} />
-          <Row label="Home Town" value={grandParent.permanent_address} />
+          <Row
+            label="Home Town"
+            value={grandParent.permanent_address}
+          />
           <Row label="Current Address" value={grandParent.current_address} />
         </Section>
 
         {/* ------------- BANK DETAILS ------------- */}
         {bankDetails?.bank_name ? (
-          <Section title="Bank Details">
-            <Row label="Bank Name" value={bankDetails.bank_name} />
-            <Row label="Branch Name" value={bankDetails.branch_name} />
-            <Row label="Account Holder" value={bankDetails.account_holder} />
-            <Row label="Account Number" value={bankDetails.account_number} />
-            <Row label="IFSC Code" value={bankDetails.ifsc_code} />
-          </Section>
-        ) : (
-          <Section title="Bank Details">
-            <Row label="Info" value="No Data Available" />
-          </Section>
-        )}
+  <Section title="Bank Details">
+    <Row label="Bank Name" value={bankDetails.bank_name} />
+    <Row label="Branch Name" value={bankDetails.branch_name} />
+    <Row label="Account Holder" value={bankDetails.account_holder} />
+    <Row label="Account Number" value={bankDetails.account_number} />
+    <Row label="IFSC Code" value={bankDetails.ifsc_code} />
+  </Section>
+) : (
+  <Section title="Bank Details">
+    <Row label="Info" value="No Data Available" />
+  </Section>
+)}
+
 
         <div className="mt-4 text-right font-semibold">
           Status: {status?.toUpperCase()}

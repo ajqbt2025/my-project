@@ -4,6 +4,8 @@ const grandfatherDetailSchema = new mongoose.Schema(
   {
     full_name: { type: String, required: true },
     father_name: { type: String },
+    mother_name: { type: String },
+    grand_mother_name: { type: String },
     dob: { type: Date },
     birth_place: { type: String },
 

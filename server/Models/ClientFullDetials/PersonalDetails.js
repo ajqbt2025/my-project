@@ -14,6 +14,7 @@ const personalDeSchema = new mongoose.Schema(
     email: { type: String, required: true },
     adhaarNum: { type: String, required: true },
     permanentAddress: { type: String, required: true },
+    currentAddress: { type: String, required: true },
     profileImage: { type: String, required: true },
   },
   { timestamps: true }

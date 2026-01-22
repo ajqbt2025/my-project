@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import staticqr from "../../../assests/buttonImage/createClientQR.jpeg";
+import staticqr from "../../../assests/buttonImage/createClientQR2.jpeg";
 
 import { saveMaritalCertificateService } from "../../../services/operations/CertifiedService";
 

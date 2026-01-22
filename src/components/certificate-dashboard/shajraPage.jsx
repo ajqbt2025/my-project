@@ -10,7 +10,7 @@ import {
   createOrUpdateShajrahService,
   getShajrahDetailsService,
 } from "../../services/operations/CertifiedService";
-import staticqr from "../../assests/buttonImage/createClientQR.jpeg";
+import staticqr from "../../assests/buttonImage/createClientQR2.jpeg";
 import MultiSearchBar from "../../pages/ClientSearchBar";
 
 const relationMap = [

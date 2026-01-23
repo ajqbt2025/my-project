@@ -104,15 +104,14 @@ export default function PublicNotification() {
 
                   {/* 🔥 FIXED MESSAGE HEIGHT */}
                   <p
-                    className={`mt-2 text-sm text-richblack-50 leading-relaxed overflow-hidden transition-all
-                      ${
-                        expanded
-                          ? "max-h-none"
-                          : "max-h-[3.2rem] sm:max-h-[4.8rem]"
-                      }`}
-                  >
-                    {note.message}
-                  </p>
+  dir="auto"
+  className={`mt-2 text-sm text-richblack-50 leading-relaxed overflow-hidden transition-all
+    ${expanded ? "max-h-none" : "max-h-[3.2rem] sm:max-h-[4.8rem]"}
+  `}
+>
+  {note.message}
+</p>
+
 
                   <button
                     onClick={() => toggle(note._id)}

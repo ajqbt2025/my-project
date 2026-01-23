@@ -64,10 +64,10 @@ const GrandparentDetailsPage = ({ loading }) => {
         />
 
         <div className="form-grid-2">
-          <InputField id="full_name" label="Full Name" register={register} errors={errors} />
-          <InputField id="father_name" label="Father Name" register={register} errors={errors} />
-          <InputField id="mother_name" label="Mother Name" register={register} errors={errors} />
-          <InputField id="grand_mother_name" label="Grand Mother Name" register={register} errors={errors} />
+          <InputField id="full_name" label="Grand Father Name" register={register} errors={errors} />
+          <InputField id="father_name" label="Great-Grandfather Name" register={register} errors={errors} />
+          <InputField id="mother_name" label="Grand Mother Name" register={register} errors={errors} />
+          <InputField id="grand_mother_name" label="Great-Grandmother Name" register={register} errors={errors} />
           <InputField id="dob" label="Date of Birth" type="date" register={register} errors={errors} />
           <InputField id="birth_place" label="Birth Place" register={register} errors={errors} />
           <InputField id="uidai" label="UIDAI Number" register={register} errors={errors} />

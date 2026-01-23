@@ -43,7 +43,7 @@ export default function Login() {
       <div className="w-full max-w-md rounded-2xl border border-richblack-700 bg-richblack-800 shadow-xl p-8">
 
         <h2 className="text-3xl font-semibold text-richblack-5 text-center">
-          Welcome Back 
+          Welcome Back To AJQFT
         </h2>
 
         <p className="text-richblack-200 text-center mt-1">

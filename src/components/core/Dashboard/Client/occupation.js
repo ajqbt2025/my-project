@@ -170,7 +170,7 @@ const OccupationDetailsPage = ({ loading }) => {
         </div>
 
         {/* Submit */}
-        <div className="flex justify-end pt-4">
+        <div className="flex justify-center pt-4">
           <button
             type="submit"
             disabled={loading}

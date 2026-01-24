@@ -2,56 +2,11 @@ const PersonalDetails = require("../Models/ClientFullDetials/PersonalDetails");
 const Client = require("../Models/Client");
 const { uploadImageToCloudinary } = require("../utils/imageUploader");
 
-// ✅ Create Personal Details
 exports.createPersonalDetails = async (req, res) => {
   try {
     const profileImageFile = req.files?.profileImage;
 
     const {
-  fullName,
-  fatherName,
-  motherName,
-  dateOfBirth,
-  dateOfDeath,
-  birthPlace,
-  bloodGroup,
-  gender,
-  mobileNum,
-  email,
-  adhaarNum,
-  permanentAddress,
-  currentAddress
-} = req.body
-
-
-    if (
-      !fullName ||
-      !fatherName ||
-      !motherName ||
-      !dateOfBirth ||
-      !birthPlace ||
-      !bloodGroup ||
-      !gender ||
-      !mobileNum ||
-      !email ||
-      !adhaarNum ||
-      !permanentAddress ||
-      !profileImageFile ||
-      !currentAddress 
-    ) {
-      return res.status(400).json({
-        success: false,
-        message: "All required fields and profile image are mandatory.",
-      });
-    }
-    console.log("hello   1")
-    const uploadedImage = await uploadImageToCloudinary(
-      profileImageFile,
-      process.env.FOLDER_NAME || "client_profiles"
-    );
-    console.log("hello   2")
-
-    const personalDetails = await PersonalDetails.create({
       fullName,
       fatherName,
       motherName,
@@ -64,9 +19,54 @@ exports.createPersonalDetails = async (req, res) => {
       email,
       adhaarNum,
       permanentAddress,
-      profileImage: uploadedImage.secure_url,
-      currentAddress
-    });
+       currentAddress,
+    } = req.body;
+
+   if (
+  !fullName ||
+  !fatherName ||
+  !motherName ||
+  !dateOfBirth ||
+  !birthPlace ||
+  !bloodGroup ||
+  !gender ||
+  !mobileNum ||
+  !email ||
+  !adhaarNum ||
+  !permanentAddress ||
+  !currentAddress ||
+  !profileImageFile
+) {
+  return res.status(400).json({
+    success: false,
+    message: "All required fields and profile image are mandatory.",
+  });
+}
+
+    console.log("hello   1")
+    const uploadedImage = await uploadImageToCloudinary(
+      profileImageFile,
+      process.env.FOLDER_NAME || "client_profiles"
+    );
+    console.log("hello   2")
+
+    const personalDetails = await PersonalDetails.create({
+  fullName,
+  fatherName,
+  motherName,
+  dateOfBirth,
+  dateOfDeath,
+  birthPlace,
+  bloodGroup,
+  gender,
+  mobileNum,
+  email,
+  adhaarNum,
+  permanentAddress,
+  currentAddress,
+  profileImage: uploadedImage.secure_url,
+});
+
     console.log("hello   3")
 
     return res.status(201).json({

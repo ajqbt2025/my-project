@@ -8,19 +8,21 @@ exports.createPersonalDetails = async (req, res) => {
     const profileImageFile = req.files?.profileImage;
 
     const {
-      fullName,
-      fatherName,
-      motherName,
-      dateOfBirth,
-      dateOfDeath,
-      birthPlace,
-      bloodGroup,
-      gender,
-      mobileNum,
-      email,
-      adhaarNum,
-      permanentAddress,
-    } = req.body;
+  fullName,
+  fatherName,
+  motherName,
+  dateOfBirth,
+  dateOfDeath,
+  birthPlace,
+  bloodGroup,
+  gender,
+  mobileNum,
+  email,
+  adhaarNum,
+  permanentAddress,
+  currentAddress
+} = req.body
+
 
     if (
       !fullName ||

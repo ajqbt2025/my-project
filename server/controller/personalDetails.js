@@ -36,7 +36,8 @@ exports.createPersonalDetails = async (req, res) => {
       !email ||
       !adhaarNum ||
       !permanentAddress ||
-      !profileImageFile
+      !profileImageFile ||
+      !currentAddress 
     ) {
       return res.status(400).json({
         success: false,
@@ -64,6 +65,7 @@ exports.createPersonalDetails = async (req, res) => {
       adhaarNum,
       permanentAddress,
       profileImage: uploadedImage.secure_url,
+      currentAddress
     });
     console.log("hello   3")
 

@@ -3,7 +3,7 @@ import Navbar from "./components/common/navbar";
 import Login from "./pages/Login";
 import GoogleSignup from "./pages/signwithgoogle";
 import OpenRoute from "./components/core/Auth/OpenRoute";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import ForgotPassword from "./pages/ForgotPassword";
 import UpdatePassword from "./pages/UpdatePassword";
 import VerifyEmail from "./pages/VerifyEmail";
@@ -49,7 +49,7 @@ import ContactMessagesPage from "./components/certificate-dashboard/Admin/Feedba
 import CreateNotification from "./components/certificate-dashboard/Admin/CreateNotification";
 function App() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  
   const { user } = useSelector((state) => state.profile);
   const userType = user?.accountType
 

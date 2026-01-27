@@ -46,7 +46,7 @@ export default function Login() {
             {/* Header */}
             <header className="text-center mb-10">
               <h1 className="text-4xl font-bold bg-gradient-to-r from-richblack-5 via-richblack-100 to-richblack-500 bg-clip-text text-transparent inline-block">
-                Welcome Back
+                Welcome Back AJQFT
               </h1>
               <p className="mt-3 text-richblack-300 text-sm tracking-wide">
                 Experience the next generation of learning.
@@ -82,7 +82,7 @@ export default function Login() {
                   name="email"
                   value={email}
                   onChange={handleChange}
-                  placeholder="name@company.com"
+                  placeholder="name@email.com"
                   className="w-full rounded-xl bg-richblack-900/50 p-3.5 text-richblack-5 border border-richblack-700 focus:border-blue-100 focus:ring-1 focus:ring-blue-100 outline-none transition-all duration-300"
                 />
               </div>

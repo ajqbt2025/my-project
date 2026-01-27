@@ -58,7 +58,8 @@ useEffect(() => {
 
   const token = JSON.parse(localStorage.getItem("token"))
   dispatch(getUserDetails(token))
-}, [user])
+}, [user, dispatch])
+
 
   return (
     <div className="flex min-h-screen w-screen flex-col bg-richblack-900 font-inter">

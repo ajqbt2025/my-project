@@ -16,61 +16,66 @@ export default function GoogleSignup() {
   }
 
   return (
-    <div className="min-h-[calc(100vh-3.5rem)] flex items-center justify-center bg-richblack-900 p-4 font-inter">
+    <div className="min-h-[calc(100vh-3.5rem)] flex items-center justify-center bg-black p-4 font-inter selection:bg-blue-200">
       
-      {/* --- Main Image-Style Card --- */}
-      <div className="relative w-full max-w-[450px] overflow-hidden rounded-[3.5rem] bg-gradient-to-br from-caribbeangreen-300 via-blue-100 to-pink-300 p-10 shadow-[0_20px_50px_rgba(0,0,0,0.3)] md:p-14">
+      {/* Background Decorative Aura (Reflecting Image Theme) */}
+      <div className="absolute top-1/4 -left-20 h-80 w-80 rounded-full bg-richblue-500/10 blur-[120px]"></div>
+      <div className="absolute bottom-1/4 -right-20 h-80 w-80 rounded-full bg-pink-500/10 blur-[120px]"></div>
+
+      {/* --- Main Glossy Card --- */}
+      <div className="relative w-full max-w-[450px] overflow-hidden rounded-[3.5rem] border border-white/10 bg-gradient-to-br from-richblack-800 via-richblack-900 to-black p-10 shadow-[0_0_60px_rgba(0,0,0,0.9)] md:p-14">
         
-        {/* Glass Effect Overlay */}
-        <div className="absolute inset-0 bg-black/5 backdrop-blur-[1px]"></div>
+        {/* Gloss Reflection Layer (From Image 2 style) */}
+        <div className="absolute -top-[40%] -left-[10%] h-[150%] w-[130%] rotate-[25deg] bg-gradient-to-b from-white/5 to-transparent pointer-events-none"></div>
 
         <div className="relative z-10 flex flex-col items-center text-center">
           
-          {/* Brand/Heading */}
-          <h1 className="text-4xl font-bold text-white tracking-tight">
+          {/* User Icon Placeholder (Image 2 style) */}
+          <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-white/5 border border-white/10 shadow-inner">
+             <div className="h-10 w-10 rounded-full bg-richblack-600/50"></div>
+          </div>
+
+          <h1 className="text-4xl font-black text-white tracking-tighter">
             EduNova
           </h1>
           
-          <div className="mt-6 space-y-2">
-            <p className="text-lg font-medium text-white/90">
-              Create your account
-            </p>
-            <p className="text-sm leading-relaxed text-white/70 italic font-edu-sa">
-              "Smart education for a better tomorrow"
+          <div className="mt-4 space-y-2">
+            <p className="text-richblack-50 text-lg font-medium">Create your account</p>
+            <p className="font-edu-sa text-sm italic text-blue-100/80">
+              Smart education for a better tomorrow
             </p>
           </div>
 
-          {/* Action Area (Visual representation of your image) */}
-          <div className="mt-10 w-full">
+          {/* Action Area */}
+          <div className="mt-12 w-full">
             <button
               onClick={handleGoogleLogin}
-              className="group relative flex w-full items-center justify-center gap-x-4 rounded-full bg-white/20 border border-white/40 py-4 px-6 text-white backdrop-blur-xl transition-all duration-300 hover:bg-white/30 hover:scale-[1.03] active:scale-95 shadow-xl"
+              className="group relative flex w-full items-center justify-center gap-x-4 rounded-full bg-white/5 border border-white/10 py-4 px-6 text-white backdrop-blur-2xl transition-all duration-500 hover:bg-white/10 hover:border-white/20 hover:scale-[1.02] active:scale-95 shadow-2xl"
             >
-              <div className="rounded-full bg-white p-1.5 group-hover:rotate-[360deg] transition-transform duration-500">
+              <div className="rounded-full bg-white p-2 group-hover:rotate-[360deg] transition-transform duration-700 shadow-[0_0_15px_rgba(255,255,255,0.3)]">
                 <FcGoogle className="text-2xl" />
               </div>
-              <span className="text-lg font-semibold tracking-wide">
+              <span className="text-lg font-bold tracking-tight">
                 Continue with Google
               </span>
             </button>
           </div>
 
           {/* Footer Info */}
-          <div className="mt-12 space-y-4">
-            <p className="text-[11px] uppercase tracking-[0.2em] text-white/50 font-bold">
-              Secure Cloud Auth
-            </p>
-            <p className="text-xs text-white/60 leading-tight">
-              By continuing, you agree to our <br />
-              <span className="text-white underline cursor-pointer">Terms</span> & <span className="text-white underline cursor-pointer">Privacy Policy</span>
+          <div className="mt-14 space-y-6">
+            <div className="flex items-center gap-3">
+               <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent to-white/10"></div>
+               <span className="text-[10px] font-bold text-white/30 uppercase tracking-[0.3em]">Cloud Identity</span>
+               <div className="h-[1px] flex-1 bg-gradient-to-l from-transparent to-white/10"></div>
+            </div>
+            
+            <p className="text-[11px] leading-relaxed text-richblack-400">
+              By joining, you agree to our <br />
+              <span className="text-blue-100 hover:text-white underline cursor-pointer transition-colors">Terms of Service</span> & <span className="text-blue-100 hover:text-white underline cursor-pointer transition-colors">Privacy Policy</span>
             </p>
           </div>
 
         </div>
-
-        {/* Decorative Light Spots (Image feel) */}
-        <div className="absolute -top-10 -right-10 h-32 w-32 rounded-full bg-white/10 blur-3xl"></div>
-        <div className="absolute -bottom-10 -left-10 h-32 w-32 rounded-full bg-blue-100/20 blur-3xl"></div>
       </div>
     </div>
   )

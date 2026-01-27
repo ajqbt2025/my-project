@@ -49,6 +49,10 @@ const userSchema = new mongoose.Schema(
     image: {
       type: String,
     },
+    isPasswordSet: {
+  type: Boolean,
+  default: false
+},
 
     // Add timestamps for when the document is created and last modified
   },

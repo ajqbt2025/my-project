@@ -225,25 +225,7 @@ exports.changePassword = async (req, res) => {
       { new: true }
     );
 
-    try {
-      const emailResponse = await mailSender(
-        updatedUserDetails.email,
-        "Password for your account has been updated",
-        passwordUpdated(
-          updatedUserDetails.email,
-          `Password updated successfully for ${updatedUserDetails.fullName} ${updatedUserDetails.lastName}`
-        )
-      );
-      console.log("Email sent successfully:", emailResponse.response);
-    } catch (error) {
-      console.error("Error occurred while sending email:", error);
-      return res.status(500).json({
-        success: false,
-        message: "Error occurred while sending email",
-        error: error.message,
-      });
-    }
-
+    
     return res
       .status(200)
       .json({ success: true, message: "Password updated successfully" });
@@ -287,7 +269,7 @@ exports.googleAuth = async (req, res) => {
         fullName,
         email,
         contactNumber: 9999999999,
-        password: "",
+        password: tempPassword,
         additionalDetails: profileDetails._id,
         accountType: "User",
         image: "",

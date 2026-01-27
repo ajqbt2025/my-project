@@ -26,7 +26,7 @@ exports.updateProfile = async (req, res) => {
       contactNumber
     })
     await user.save()
-
+console.log("dateOfBirth ",dateOfBirth )
     // Update the profile fields
     profile.dateOfBirth = dateOfBirth
     profile.about = about

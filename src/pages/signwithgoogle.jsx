@@ -36,13 +36,13 @@ export default function GoogleSignup() {
           </div>
 
           <h1 className="text-4xl font-black text-white tracking-tighter">
-            EduNova
+            AJQFT
           </h1>
           
           <div className="mt-4 space-y-2">
             <p className="text-richblack-50 text-lg font-medium">Create your account</p>
             <p className="font-edu-sa text-sm italic text-blue-100/80">
-              Smart education for a better tomorrow
+              Signup for free
             </p>
           </div>
 

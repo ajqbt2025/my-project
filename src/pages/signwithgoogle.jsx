@@ -16,28 +16,61 @@ export default function GoogleSignup() {
   }
 
   return (
-    <div className="flex min-h-[calc(100vh-3.5rem)] items-center justify-center bg-richblack-900 px-4">
-      <div className="w-full max-w-[420px] rounded-xl bg-richblack-800 p-6 sm:p-8 shadow-lg">
-        <h1 className="text-center text-2xl sm:text-3xl font-semibold text-richblack-5">
-          Welcome to <span className="text-blue-100">EduNova</span>
-        </h1>
+    <div className="min-h-[calc(100vh-3.5rem)] flex items-center justify-center bg-richblack-900 p-4 font-inter">
+      
+      {/* --- Main Image-Style Card --- */}
+      <div className="relative w-full max-w-[450px] overflow-hidden rounded-[3.5rem] bg-gradient-to-br from-caribbeangreen-300 via-blue-100 to-pink-300 p-10 shadow-[0_20px_50px_rgba(0,0,0,0.3)] md:p-14">
+        
+        {/* Glass Effect Overlay */}
+        <div className="absolute inset-0 bg-black/5 backdrop-blur-[1px]"></div>
 
-        <p className="mt-3 text-center text-sm sm:text-base text-richblack-100">
-          Learn skills that matter today and build a better tomorrow with
-          <span className="font-edu-sa italic text-blue-100"> smart education</span>
-        </p>
+        <div className="relative z-10 flex flex-col items-center text-center">
+          
+          {/* Brand/Heading */}
+          <h1 className="text-4xl font-bold text-white tracking-tight">
+            EduNova
+          </h1>
+          
+          <div className="mt-6 space-y-2">
+            <p className="text-lg font-medium text-white/90">
+              Create your account
+            </p>
+            <p className="text-sm leading-relaxed text-white/70 italic font-edu-sa">
+              "Smart education for a better tomorrow"
+            </p>
+          </div>
 
-        <button
-          onClick={handleGoogleLogin}
-          className="mt-8 flex w-full items-center justify-center gap-3 rounded-md border border-richblack-600 bg-richblack-700 py-3 text-sm sm:text-base font-medium text-richblack-5 transition-all duration-200 hover:bg-richblack-600 hover:scale-[1.02]"
-        >
-          <FcGoogle className="text-xl sm:text-2xl" />
-          Continue with Google
-        </button>
+          {/* Action Area (Visual representation of your image) */}
+          <div className="mt-10 w-full">
+            <button
+              onClick={handleGoogleLogin}
+              className="group relative flex w-full items-center justify-center gap-x-4 rounded-full bg-white/20 border border-white/40 py-4 px-6 text-white backdrop-blur-xl transition-all duration-300 hover:bg-white/30 hover:scale-[1.03] active:scale-95 shadow-xl"
+            >
+              <div className="rounded-full bg-white p-1.5 group-hover:rotate-[360deg] transition-transform duration-500">
+                <FcGoogle className="text-2xl" />
+              </div>
+              <span className="text-lg font-semibold tracking-wide">
+                Continue with Google
+              </span>
+            </button>
+          </div>
 
-        <p className="mt-6 text-center text-xs sm:text-sm text-richblack-300">
-          By continuing, you agree to our Terms & Privacy Policy
-        </p>
+          {/* Footer Info */}
+          <div className="mt-12 space-y-4">
+            <p className="text-[11px] uppercase tracking-[0.2em] text-white/50 font-bold">
+              Secure Cloud Auth
+            </p>
+            <p className="text-xs text-white/60 leading-tight">
+              By continuing, you agree to our <br />
+              <span className="text-white underline cursor-pointer">Terms</span> & <span className="text-white underline cursor-pointer">Privacy Policy</span>
+            </p>
+          </div>
+
+        </div>
+
+        {/* Decorative Light Spots (Image feel) */}
+        <div className="absolute -top-10 -right-10 h-32 w-32 rounded-full bg-white/10 blur-3xl"></div>
+        <div className="absolute -bottom-10 -left-10 h-32 w-32 rounded-full bg-blue-100/20 blur-3xl"></div>
       </div>
     </div>
   )

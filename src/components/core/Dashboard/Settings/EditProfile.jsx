@@ -24,6 +24,7 @@ export default function EditProfile() {
       about: user?.additionalDetails?.about || "",
     }
   })
+  console.log("dateOfBirth",user?.additionalDetails?.dateOfBirth)
 
   const onSubmit = async (data) => {
     dispatch(updateProfile(token, data))

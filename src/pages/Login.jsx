@@ -1,3 +1,22 @@
+// import loginImg from "../assests/login.webp"
+// import Template from "../components/core/Auth/Template"
+
+// function Login() {
+//   return (
+//     <Template
+//       title="Welcome Back"
+//       description1="Build skills for today, tomorrow, and beyond."
+//       description2="Education to future-proof your career."
+//       image={loginImg}
+//       formType="login"
+//     />
+//   )
+// }
+
+// export default Login
+
+
+
 
 
 import React, { useState } from "react"
@@ -43,7 +62,7 @@ export default function Login() {
       <div className="w-full max-w-md rounded-2xl border border-richblack-700 bg-richblack-800 shadow-xl p-8">
 
         <h2 className="text-3xl font-semibold text-richblack-5 text-center">
-          Welcome Back To AJQFT
+          Welcome Back 
         </h2>
 
         <p className="text-richblack-200 text-center mt-1">

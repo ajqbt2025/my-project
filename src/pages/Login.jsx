@@ -52,7 +52,14 @@ export default function Login() {
           </div>
 
           <form onSubmit={handleSubmit} className="w-full space-y-6">
-            
+            <button
+              type="button"
+              onClick={handleGoogle}
+              className="flex w-full items-center justify-center gap-x-3 rounded-full border border-white/10 bg-white/5 py-3 text-white transition-all hover:bg-white/10 hover:border-white/20"
+            >
+              <FcGoogle className="text-xl" />
+              <span className="text-sm font-medium">Continue with Google</span>
+            </button>
             {/* Email Field */}
             <div className="space-y-2">
               <label className="text-xs font-bold uppercase tracking-widest text-richblack-200 ml-4">
@@ -65,7 +72,7 @@ export default function Login() {
                   name="email"
                   value={email}
                   onChange={handleChange}
-                  placeholder="name@example.com"
+                  placeholder="name@email.com"
                   className="w-full rounded-full bg-richblack-700/50 border border-white/10 p-4 pl-6 text-white placeholder-richblack-400 backdrop-blur-xl focus:bg-richblack-700 focus:border-blue-100 focus:outline-none transition-all duration-300 shadow-inner"
                 />
               </div>
@@ -115,21 +122,14 @@ export default function Login() {
             </button>
 
             {/* Google Login */}
-            <button
-              type="button"
-              onClick={handleGoogle}
-              className="flex w-full items-center justify-center gap-x-3 rounded-full border border-white/10 bg-white/5 py-3 text-white transition-all hover:bg-white/10 hover:border-white/20"
-            >
-              <FcGoogle className="text-xl" />
-              <span className="text-sm font-medium">Continue with Google</span>
-            </button>
+            
           </form>
 
           {/* Footer Link */}
           <p className="mt-8 text-center text-sm text-richblack-400">
             Don't have an account?{" "}
             <Link to="/signup" className="font-bold text-white hover:text-blue-100 underline underline-offset-4">
-              Join EduNova
+              Join AJQFT
             </Link>
           </p>
         </div>

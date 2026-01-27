@@ -264,11 +264,6 @@ dispatch(setUser({ ...user, image: userImage }));
   };
 }
 
-
-
-
-
-
 export const setPasswordAPI = async (payload) => {
   try {
     const response = await apiConnector("POST", SET_PASSWORD_API, payload);

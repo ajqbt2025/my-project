@@ -241,17 +241,17 @@ exports.changePassword = async (req, res) => {
 
 exports.googleAuth = async (req, res) => {
   try {
-    const { firstName, lastName, email, googleId } = req.body;
+    const { firstName, lastName, email, googleId } = req.body
 
     if (!email || !googleId) {
       return res.status(400).json({
         success: false,
         message: "Google login failed",
-      });
+      })
     }
 
-    let user = await User.findOne({ email });
-    const isNewUser = !user;
+    let user = await User.findOne({ email }).populate("additionalDetails")
+    const isNewUser = !user
 
     if (isNewUser) {
       const profileDetails = await Profile.create({
@@ -259,37 +259,32 @@ exports.googleAuth = async (req, res) => {
         dateOfBirth: null,
         about: null,
         contactNumber: null,
-      });
+      })
 
-      const fullName = `${firstName || ""} ${lastName || ""}`.trim();
-
-      const tempPassword = await bcrypt.hash(googleId, 10);
+      const fullName = `${firstName || ""} ${lastName || ""}`.trim()
 
       user = await User.create({
         fullName,
         email,
         contactNumber: 9999999999,
-        password: tempPassword,
+        password: null,
+        isPasswordSet: false,
         additionalDetails: profileDetails._id,
         accountType: "User",
         image: "",
-      });
-    } else {
-      user = await User.findOne({ email }).populate("additionalDetails");
+      })
     }
 
     const token = jwt.sign(
       { id: user._id, email: user.email, accountType: user.accountType },
       process.env.JWT_SECRET,
       { expiresIn: "24h" }
-    );
-
-    user.password = undefined;
+    )
 
     res.cookie("token", token, {
       httpOnly: true,
       expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
-    });
+    })
 
     return res.status(200).json({
       success: true,
@@ -297,71 +292,73 @@ exports.googleAuth = async (req, res) => {
       user,
       isNewUser,
       message: "Logged in successfully with Google",
-    });
+    })
   } catch (error) {
-    console.error(error);
+    console.error(error)
     return res.status(500).json({
       success: false,
       message: "Google authentication failed",
-      error: error.message,
-    });
+    })
   }
-};
+}
+
 
 exports.setPassword = async (req, res) => {
   try {
-    let { password, confirmPassword, accountType, email } = req.body;
+    let { password, confirmPassword, accountType, email } = req.body
 
-    if (!password || !confirmPassword ||  !email) {
+    if (!password || !confirmPassword || !email) {
       return res.status(400).json({
         success: false,
         message: "All fields are required",
-      });
+      })
     }
 
     if (password !== confirmPassword) {
       return res.status(400).json({
         success: false,
         message: "Passwords do not match",
-      });
+      })
     }
 
     accountType =
-      accountType.charAt(0).toUpperCase() + accountType.slice(1).toLowerCase();
+      accountType.charAt(0).toUpperCase() +
+      accountType.slice(1).toLowerCase()
 
     if (!["Admin", "User"].includes(accountType)) {
       return res.status(400).json({
         success: false,
         message: "Invalid account type",
-      });
+      })
     }
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email })
 
     if (!user) {
       return res.status(404).json({
         success: false,
         message: "User not found",
-      });
+      })
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 10)
 
-    user.password = hashedPassword;
-    user.accountType = accountType;
+    user.password = hashedPassword
+    user.accountType = accountType
+    user.isPasswordSet = true
 
-    await user.save();
+    await user.save()
 
     return res.status(200).json({
       success: true,
       message: "Password & account type updated successfully",
       user,
-    });
+    })
   } catch (error) {
-    console.error("Error in setPassword:", error);
+    console.error("Error in setPassword:", error)
     return res.status(500).json({
       success: false,
       message: "Something went wrong",
-    });
+    })
   }
-};
+}

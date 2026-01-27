@@ -3,7 +3,6 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
 import { FcGoogle } from "react-icons/fc"
 import { useDispatch } from "react-redux"
 import { useNavigate, Link } from "react-router-dom"
-
 import { login, googleLogin } from "../services/operations/authAPI"
 import { signInWithGoogle } from "../utils/fireBase"
 
@@ -12,18 +11,12 @@ export default function Login() {
   const navigate = useNavigate()
 
   const [showPassword, setShowPassword] = useState(false)
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  })
+  const [formData, setFormData] = useState({ email: "", password: "" })
 
   const { email, password } = formData
 
   const handleChange = (e) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }))
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
   const handleSubmit = (e) => {
@@ -38,97 +31,108 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-[calc(100vh-3.5rem)] grid place-items-center bg-richblack-900 font-inter">
-      <div className="w-11/12 max-w-[450px] p-4 md:p-8">
-        
-        {/* Heading Section */}
-        <h1 className="text-[1.875rem] font-semibold leading-[2.375rem] text-richblack-5">
-          Welcome Back
-        </h1>
-        <p className="mt-4 text-[1.125rem] leading-[1.625rem]">
-          <span className="text-richblack-100">Build skills for today, tomorrow, and beyond.</span>{" "}
-          <span className="font-edu-sa font-bold italic text-blue-100">
-            Education to future-proof your career.
-          </span>
-        </p>
+    <div className="relative min-h-[calc(100vh-3.5rem)] flex items-center justify-center bg-richblack-900 overflow-hidden font-inter">
+      
+      {/* --- Dynamic Background Elements --- */}
+      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-blue-200/10 blur-[120px] animate-pulse"></div>
+      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-yellow-50/5 blur-[120px]"></div>
 
-        {/* Google Login Button */}
-        <button
-          onClick={handleGoogle}
-          className="mt-6 flex w-full items-center justify-center gap-x-2 rounded-[8px] border border-richblack-700 bg-richblack-800 py-[8px] px-[12px] font-medium text-richblack-100 transition-all duration-200 hover:bg-richblack-700 hover:text-richblack-5"
-        >
-          <FcGoogle className="text-2xl" />
-          Sign in with Google
-        </button>
-
-        {/* Divider */}
-        <div className="my-6 flex items-center gap-x-4">
-          <div className="h-[1px] w-full bg-richblack-700"></div>
-          <p className="font-medium leading-[1.375rem] text-richblack-700 uppercase">OR</p>
-          <div className="h-[1px] w-full bg-richblack-700"></div>
-        </div>
-
-        {/* Form Section */}
-        <form onSubmit={handleSubmit} className="flex w-full flex-col gap-y-4">
-          <label className="w-full">
-            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
-              Email Address <sup className="text-pink-200">*</sup>
-            </p>
-            <input
-              required
-              type="email"
-              name="email"
-              value={email}
-              onChange={handleChange}
-              placeholder="Enter email address"
-              className="w-full rounded-[0.5rem] bg-richblack-800 p-[12px] text-richblack-5 border-b-[1px] border-richblack-600 focus:outline-none focus:border-yellow-50 transition-all duration-200"
-            />
-          </label>
-
-          <label className="relative w-full">
-            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
-              Password <sup className="text-pink-200">*</sup>
-            </p>
-            <input
-              required
-              type={showPassword ? "text" : "password"}
-              name="password"
-              value={password}
-              onChange={handleChange}
-              placeholder="Enter Password"
-              className="w-full rounded-[0.5rem] bg-richblack-800 p-[12px] pr-12 text-richblack-5 border-b-[1px] border-richblack-600 focus:outline-none focus:border-yellow-50 transition-all duration-200"
-            />
-            <span
-              onClick={() => setShowPassword((prev) => !prev)}
-              className="absolute right-3 top-[38px] z-[10] cursor-pointer"
-            >
-              {showPassword ? (
-                <AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF" />
-              ) : (
-                <AiOutlineEye fontSize={24} fill="#AFB2BF" />
-              )}
-            </span>
-            <Link to="/forgot-password">
-              <p className="mt-1 ml-auto max-w-fit text-xs text-blue-100 hover:text-blue-200 transition-all">
-                Forgot Password?
+      <div className="relative z-10 w-11/12 max-w-[480px] p-1">
+        {/* Border Gradient Wrap */}
+        <div className="rounded-3xl bg-gradient-to-b from-richblack-700 to-richblack-900 p-[1px] shadow-2xl">
+          
+          <div className="rounded-3xl bg-richblack-800/90 backdrop-blur-xl p-8 md:p-10">
+            
+            {/* Header */}
+            <header className="text-center mb-10">
+              <h1 className="text-4xl font-bold bg-gradient-to-r from-richblack-5 via-richblack-100 to-richblack-500 bg-clip-text text-transparent inline-block">
+                Welcome Back
+              </h1>
+              <p className="mt-3 text-richblack-300 text-sm tracking-wide">
+                Experience the next generation of learning.
               </p>
-            </Link>
-          </label>
+            </header>
 
-          <button
-            type="submit"
-            className="mt-6 rounded-[8px] bg-yellow-50 py-[12px] px-[12px] font-medium text-richblack-900 transition-all duration-200 hover:scale-95 hover:bg-yellow-100"
-          >
-            Sign In
-          </button>
-        </form>
+            {/* Google Action */}
+            <button
+              onClick={handleGoogle}
+              className="group relative flex w-full items-center justify-center gap-x-3 rounded-xl border border-richblack-600 bg-richblack-900 py-3 px-4 text-richblack-100 transition-all duration-300 hover:border-blue-100 hover:bg-richblack-800"
+            >
+              <FcGoogle className="text-2xl group-hover:scale-110 transition-transform" />
+              <span className="font-medium">Continue with Google</span>
+            </button>
 
-        <p className="mt-6 text-center text-richblack-300">
-          Don't have an account?{" "}
-          <Link to="/signup">
-            <span className="font-medium text-blue-100 hover:text-blue-200 transition-all">Sign Up</span>
-          </Link>
-        </p>
+            {/* Divider */}
+            <div className="my-8 flex items-center gap-x-4">
+              <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent to-richblack-600"></div>
+              <p className="text-[10px] font-bold text-richblack-500 tracking-[0.2em] uppercase">Secure Login</p>
+              <div className="h-[1px] flex-1 bg-gradient-to-l from-transparent to-richblack-600"></div>
+            </div>
+
+            {/* Form */}
+            <form onSubmit={handleSubmit} className="flex flex-col gap-y-5">
+              
+              <div className="group flex flex-col gap-y-1">
+                <label className="text-xs font-semibold text-richblack-400 ml-1 uppercase tracking-tighter">
+                  Professional Email
+                </label>
+                <input
+                  required
+                  type="email"
+                  name="email"
+                  value={email}
+                  onChange={handleChange}
+                  placeholder="name@company.com"
+                  className="w-full rounded-xl bg-richblack-900/50 p-3.5 text-richblack-5 border border-richblack-700 focus:border-blue-100 focus:ring-1 focus:ring-blue-100 outline-none transition-all duration-300"
+                />
+              </div>
+
+              <div className="group flex flex-col gap-y-1 relative">
+                <label className="text-xs font-semibold text-richblack-400 ml-1 uppercase tracking-tighter">
+                  Password
+                </label>
+                <div className="relative">
+                  <input
+                    required
+                    type={showPassword ? "text" : "password"}
+                    name="password"
+                    value={password}
+                    onChange={handleChange}
+                    placeholder="••••••••"
+                    className="w-full rounded-xl bg-richblack-900/50 p-3.5 pr-12 text-richblack-5 border border-richblack-700 focus:border-blue-100 focus:ring-1 focus:ring-blue-100 outline-none transition-all duration-300"
+                  />
+                  <span
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer text-richblack-400 hover:text-blue-100 transition-colors"
+                  >
+                    {showPassword ? <AiOutlineEyeInvisible size={22} /> : <AiOutlineEye size={22} />}
+                  </span>
+                </div>
+                <Link to="/forgot-password">
+                  <p className="mt-2 text-right text-xs text-blue-100 hover:text-blue-200 transition-colors font-medium">
+                    Reset Password?
+                  </p>
+                </Link>
+              </div>
+
+              <button
+                type="submit"
+                className="relative mt-4 overflow-hidden rounded-xl bg-yellow-50 py-3.5 font-bold text-richblack-900 transition-all duration-500 hover:shadow-[0_0_20px_rgba(255,214,10,0.3)] active:scale-[0.98]"
+              >
+                <span className="relative z-10">Sign In to Dashboard</span>
+              </button>
+            </form>
+
+            <footer className="mt-8 text-center">
+              <p className="text-sm text-richblack-400">
+                New to our platform?{" "}
+                <Link to="/signup" className="font-bold text-blue-100 hover:text-blue-200 underline decoration-blue-100/30 underline-offset-4 transition-all">
+                  Create Account
+                </Link>
+              </p>
+            </footer>
+          </div>
+        </div>
       </div>
     </div>
   )

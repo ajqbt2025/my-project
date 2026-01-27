@@ -53,13 +53,12 @@ function App() {
   const { user } = useSelector((state) => state.profile);
   const userType = user?.accountType
 
-  useEffect(() => {
-  const token = localStorage.getItem("token");
+useEffect(() => {
+  if (user || !localStorage.getItem("token")) return
 
-  if (token) {
-    dispatch(getUserDetails(JSON.parse(token), navigate));
-  }
-}, [dispatch, navigate]);
+  const token = JSON.parse(localStorage.getItem("token"))
+  dispatch(getUserDetails(token))
+}, [user])
 
   return (
     <div className="flex min-h-screen w-screen flex-col bg-richblack-900 font-inter">

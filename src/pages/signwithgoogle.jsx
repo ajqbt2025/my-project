@@ -19,12 +19,12 @@ export default function GoogleSignup() {
     <div className="flex min-h-[calc(100vh-3.5rem)] items-center justify-center bg-richblack-900 px-4">
       <div className="w-full max-w-[420px] rounded-xl bg-richblack-800 p-6 sm:p-8 shadow-lg">
         <h1 className="text-center text-2xl sm:text-3xl font-semibold text-richblack-5">
-          Welcome to <span className="text-blue-100">AJQFT Community</span>
+          Welcome to <span className="text-blue-100">EduNova</span>
         </h1>
 
         <p className="mt-3 text-center text-sm sm:text-base text-richblack-100">
-          Social Welfare Foundation And Genealogy
-          <span className="font-edu-sa italic text-blue-100"> Tarkheda Amravati</span>
+          Learn skills that matter today and build a better tomorrow with
+          <span className="font-edu-sa italic text-blue-100"> smart education</span>
         </p>
 
         <button

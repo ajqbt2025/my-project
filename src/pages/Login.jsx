@@ -1,24 +1,3 @@
-// import loginImg from "../assests/login.webp"
-// import Template from "../components/core/Auth/Template"
-
-// function Login() {
-//   return (
-//     <Template
-//       title="Welcome Back"
-//       description1="Build skills for today, tomorrow, and beyond."
-//       description2="Education to future-proof your career."
-//       image={loginImg}
-//       formType="login"
-//     />
-//   )
-// }
-
-// export default Login
-
-
-
-
-
 import React, { useState } from "react"
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
 import { FcGoogle } from "react-icons/fc"
@@ -29,7 +8,6 @@ import { login, googleLogin } from "../services/operations/authAPI"
 import { signInWithGoogle } from "../utils/fireBase"
 
 export default function Login() {
-
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -42,7 +20,10 @@ export default function Login() {
   const { email, password } = formData
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }))
   }
 
   const handleSubmit = (e) => {
@@ -57,99 +38,98 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-richblack-900 px-4">
-
-      <div className="w-full max-w-md rounded-2xl border border-richblack-700 bg-richblack-800 shadow-xl p-8">
-
-        <h2 className="text-3xl font-semibold text-richblack-5 text-center">
-          Welcome Back 
-        </h2>
-
-        <p className="text-richblack-200 text-center mt-1">
-          Login to continue your journey
+    <div className="min-h-[calc(100vh-3.5rem)] grid place-items-center bg-richblack-900 font-inter">
+      <div className="w-11/12 max-w-[450px] p-4 md:p-8">
+        
+        {/* Heading Section */}
+        <h1 className="text-[1.875rem] font-semibold leading-[2.375rem] text-richblack-5">
+          Welcome Back
+        </h1>
+        <p className="mt-4 text-[1.125rem] leading-[1.625rem]">
+          <span className="text-richblack-100">Build skills for today, tomorrow, and beyond.</span>{" "}
+          <span className="font-edu-sa font-bold italic text-blue-100">
+            Education to future-proof your career.
+          </span>
         </p>
 
-        {/* Google Button */}
+        {/* Google Login Button */}
         <button
           onClick={handleGoogle}
-          className="mt-6 w-full flex items-center justify-center gap-3 rounded-lg border border-richblack-600 bg-richblack-700 py-2.5 text-richblack-5 hover:bg-richblack-600 transition-all"
+          className="mt-6 flex w-full items-center justify-center gap-x-2 rounded-[8px] border border-richblack-700 bg-richblack-800 py-[8px] px-[12px] font-medium text-richblack-100 transition-all duration-200 hover:bg-richblack-700 hover:text-richblack-5"
         >
           <FcGoogle className="text-2xl" />
-          Continue with Google
+          Sign in with Google
         </button>
 
         {/* Divider */}
-        <div className="flex items-center gap-3 my-5">
-          <div className="h-[1px] w-full bg-richblack-600" />
-          <p className="text-richblack-300 text-sm">OR</p>
-          <div className="h-[1px] w-full bg-richblack-600" />
+        <div className="my-6 flex items-center gap-x-4">
+          <div className="h-[1px] w-full bg-richblack-700"></div>
+          <p className="font-medium leading-[1.375rem] text-richblack-700 uppercase">OR</p>
+          <div className="h-[1px] w-full bg-richblack-700"></div>
         </div>
 
-        {/* Login Form */}
-        <form onSubmit={handleSubmit} className="space-y-4">
-
-          {/* Email */}
-          <div>
-            <label className="text-richblack-5 text-sm">Email</label>
+        {/* Form Section */}
+        <form onSubmit={handleSubmit} className="flex w-full flex-col gap-y-4">
+          <label className="w-full">
+            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
+              Email Address <sup className="text-pink-200">*</sup>
+            </p>
             <input
+              required
               type="email"
               name="email"
-              required
               value={email}
               onChange={handleChange}
-              placeholder="Enter your email"
-              className="mt-1 w-full rounded-lg bg-richblack-900 border border-richblack-600 px-3 py-2 text-richblack-5 outline-none"
+              placeholder="Enter email address"
+              className="w-full rounded-[0.5rem] bg-richblack-800 p-[12px] text-richblack-5 border-b-[1px] border-richblack-600 focus:outline-none focus:border-yellow-50 transition-all duration-200"
             />
-          </div>
+          </label>
 
-          {/* Password */}
-          <div className="relative">
-            <label className="text-richblack-5 text-sm">Password</label>
-
+          <label className="relative w-full">
+            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
+              Password <sup className="text-pink-200">*</sup>
+            </p>
             <input
+              required
               type={showPassword ? "text" : "password"}
               name="password"
-              required
               value={password}
               onChange={handleChange}
-              placeholder="Enter your password"
-              className="mt-1 w-full rounded-lg bg-richblack-900 border border-richblack-600 px-3 py-2 pr-10 text-richblack-5 outline-none"
+              placeholder="Enter Password"
+              className="w-full rounded-[0.5rem] bg-richblack-800 p-[12px] pr-12 text-richblack-5 border-b-[1px] border-richblack-600 focus:outline-none focus:border-yellow-50 transition-all duration-200"
             />
-
             <span
-              onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-9 cursor-pointer text-richblack-200"
+              onClick={() => setShowPassword((prev) => !prev)}
+              className="absolute right-3 top-[38px] z-[10] cursor-pointer"
             >
-              {showPassword ? <AiOutlineEyeInvisible size={22}/> : <AiOutlineEye size={22}/>}
+              {showPassword ? (
+                <AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF" />
+              ) : (
+                <AiOutlineEye fontSize={24} fill="#AFB2BF" />
+              )}
             </span>
-
-            
-              <p className="mt-1 text-xs text-blue-100 text-right" onClick={handleGoogle}>
+            <Link to="/forgot-password">
+              <p className="mt-1 ml-auto max-w-fit text-xs text-blue-100 hover:text-blue-200 transition-all">
                 Forgot Password?
               </p>
-            
-          </div>
+            </Link>
+          </label>
 
-          {/* Submit */}
           <button
             type="submit"
-            className="w-full mt-2 rounded-lg bg-yellow-50 py-2 font-semibold text-richblack-900 hover:bg-yellow-100 transition-all"
+            className="mt-6 rounded-[8px] bg-yellow-50 py-[12px] px-[12px] font-medium text-richblack-900 transition-all duration-200 hover:scale-95 hover:bg-yellow-100"
           >
             Sign In
           </button>
-
         </form>
 
-        {/* Bottom Text */}
-        <p className="text-center mt-6 text-sm mb-20 text-richblack-200">
+        <p className="mt-6 text-center text-richblack-300">
           Don't have an account?{" "}
-          <Link to="/signup" className="text-blue-100 underline">
-            Create one
+          <Link to="/signup">
+            <span className="font-medium text-blue-100 hover:text-blue-200 transition-all">Sign Up</span>
           </Link>
         </p>
-
       </div>
     </div>
   )
 }
-

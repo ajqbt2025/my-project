@@ -287,7 +287,7 @@ exports.googleAuth = async (req, res) => {
         fullName,
         email,
         contactNumber: 9999999999,
-        password: tempPassword,
+        password: "",
         additionalDetails: profileDetails._id,
         accountType: "User",
         image: "",

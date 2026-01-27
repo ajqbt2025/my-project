@@ -22,9 +22,11 @@ const userSchema = new mongoose.Schema(
     },
     // Define the password field with type String and required
     password: {
-      type: String,
-      required: true,
-    },
+  type: String,
+  required: function () {
+    return this.isPasswordSet === true
+  }
+},
     // Define the role field with type String and enum values of "Admin", "Student", or "Visitor"
     accountType: {
       type: String,

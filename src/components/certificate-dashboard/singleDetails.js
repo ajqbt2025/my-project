@@ -32,17 +32,20 @@ const ClientDetail = () => {
 
   // ---------- MAIN DATA STRUCTURE ----------
   const {
-    personalDetails = {},
-    qualifications = [], // ARRAY
-    occupation = {},
-    physicalCondition = {},
-    maritalStatus = {},
-    fatherGuardian = {},
-    grandParent = {},
-    bankDetails = {},
-    status,
-    clientId,
-  } = client;
+  personalDetails,
+  qualifications = [],
+  occupation = {},
+  physicalCondition = {},
+  maritalStatus = {},
+  fatherGuardian = {},
+  grandParent = {},
+  bankDetails = {},
+  status,
+  clientId,
+} = client || {};
+
+const safePersonalDetails = personalDetails || {};
+
 
   // 👇 qualification array ka first element
   const qualification = qualifications[0] || {};
@@ -71,21 +74,20 @@ const ClientDetail = () => {
                 <Row label="Client ID" value={clientId} />
               )}
 
-              <Row label="Full Name" value={personalDetails.fullName} />
-              <Row label="Father Name" value={personalDetails.fatherName} />
-              <Row label="Mother Name" value={personalDetails.motherName} />
-              <Row label="Gender" value={personalDetails.gender} />
-              <Row label="Blood Group" value={personalDetails.bloodGroup} />
-              <Row label="Birth Place" value={personalDetails.birthPlace} />
+            <Row label="Full Name" value={safePersonalDetails.fullName} />
+<Row label="Father Name" value={safePersonalDetails.fatherName} />
+<Row label="Mother Name" value={safePersonalDetails.motherName} />
+<Row label="Gender" value={safePersonalDetails.gender} />
+<Row label="Blood Group" value={safePersonalDetails.bloodGroup} />
+<Row label="Birth Place" value={safePersonalDetails.birthPlace} />
+<Row label="Date of Birth" value={safePersonalDetails.dateOfBirth} />
+<Row label="Mobile" value={safePersonalDetails.mobileNum} />
+<Row label="Email" value={safePersonalDetails.email} />
+<Row
+  label="Home Town"
+  value={safePersonalDetails.permanentAddress}
+/>
 
-              <Row label="Date of Birth" value={personalDetails.dateOfBirth} />
-
-              <Row label="Mobile" value={personalDetails.mobileNum} />
-              <Row label="Email" value={personalDetails.email} />
-              <Row
-                label="Home Town"
-                value={personalDetails.permanentAddress}
-              />
             </div>
 
             <div className="w-[140px] h-[180px] border border-black flex items-center justify-center">
